@@ -17,6 +17,7 @@
 
 <body>
 
+
 {{-- ------------- vue components will render here ------------- --}}
 
 <div id="app"></div>
