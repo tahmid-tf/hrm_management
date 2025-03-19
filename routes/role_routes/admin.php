@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
 
-    Route::get('/test', function () {
-        return "test";
-    });
+    Route::apiResource('employees', \App\Http\Controllers\Employee\ManageEmployeeController::class);
 
 });
