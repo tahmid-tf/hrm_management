@@ -22,8 +22,8 @@
     data-bs-parent="#accordionSidenav"
 >
     <nav class="sidenav-menu-nested nav">
-        <a class="nav-link" href=""
-        >Multi-Tenant Registration</a
+        <a class="nav-link" href="{{ route('employee.create') }}"
+        >Add Employee</a
         >
     </nav>
 </div>

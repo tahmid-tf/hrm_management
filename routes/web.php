@@ -57,3 +57,7 @@ Route::middleware('auth')->group(function () {
 // ----------------------------------- Auth Routes -----------------------------------
 
 require __DIR__ . '/auth.php';
+
+// ----------------------------------- Admin Panel Routes -----------------------------------
+
+require __DIR__ . '/admin/admin.php';
