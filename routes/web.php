@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -10,10 +11,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
+// --------------------------------------- Dashboard Redirection ---------------------------------------
+
+Route::get('/dashboard', [DashboardController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// --------------------------------------- Dashboard Redirection ---------------------------------------
 
 // --------------------------- Spatie test ---------------------------
 
@@ -38,6 +41,10 @@ Route::get('role', function () {
 
 });
 
+
+Route::get('test', function () {
+    return view('layouts.template.main');
+});
 
 // ----------------------------------- Profile update -----------------------------------
 

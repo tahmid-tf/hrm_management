@@ -18,13 +18,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         /*
-
         1. Creating a user first
         2. Creating all necessary roles
         3. Creating all necessary permissions
         4. Assigning role to user
         5. Assigning permission to user
-
          */
 
         $this->create_user_roles_permission_and_assign_roles_and_permissions();
