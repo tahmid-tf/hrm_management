@@ -50,7 +50,7 @@
                                     <br>
                             @endif
 
-                            <form method="post" action="{{ route('employee.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('hr_employee.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                                 <!-- --------------------------------- Name & Email --------------------------------- -->
@@ -250,7 +250,7 @@
                                         >Role Selection</label
                                         >
                                         <select class="form-select" name="role">
-                                            <option value="admin">Admin</option>
+{{--                                            <option value="admin">Admin</option>--}}
                                             <option value="hr">HR</option>
                                             <option value="manager">Manager</option>
                                             <option value="employee">Employee</option>

@@ -18,8 +18,7 @@ class DashboardController extends Controller
 //   ----------------------------- If user is a hr - Tahmid Ferdous -----------------------------
 
         if (auth()->user()->hasRole('hr')) {
-//            return view('panel.admin.dashboard');
-            return "hr";
+            return view('panel.hr.dashboard');
         }
 
 //   ----------------------------- If user is a manager - Tahmid Ferdous -----------------------------

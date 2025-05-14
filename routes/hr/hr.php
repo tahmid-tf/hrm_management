@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\panel\admin\EmployeeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\panel\hr\EmployeeController;
 
-Route::prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function () {
+Route::prefix('hr')->middleware(['auth', 'hr', 'verified'])->group(function () {
+
+// --------------------------------- Employee - Tahmid Ferdous ---------------------------------
+
+    Route::resource('hr_employee',EmployeeController::class);
 
 // --------------------------------- Employee - Tahmid Ferdous ---------------------------------
 
-    Route::resource('employee',EmployeeController::class);
-
-// --------------------------------- Employee - Tahmid Ferdous ---------------------------------
 
 });

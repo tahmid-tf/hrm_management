@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\Employee;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,9 +37,28 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456789'),
         ]);
 
+
+        // employee data creation
+
+        Employee::create([
+            'user_id' => $user->id,
+            'employee_id' => $user->id,
+            'phone' => '01828665566',
+            'date_of_birth' => '1995-05-15',
+            'gender' => 'male',
+            'designation' => 'Software Engineer',
+            'department' => 'IT',
+            'joining_date' => '2024-01-01',
+            'salary' => 50000,
+            'address' => '123, Dhaka, Bangladesh',
+            'status' => 'active',
+            'image' => 'images/default.png', // adjust if you have a default image
+        ]);
+
+
         // role creation
 
-        $roles = ['admin', 'hr', 'manager'];
+        $roles = ['admin', 'hr', 'manager', 'employee'];
 
         foreach ($roles as $role) {
             Role::create(['name' => $role]);

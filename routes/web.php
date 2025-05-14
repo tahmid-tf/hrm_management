@@ -41,6 +41,10 @@ Route::get('role', function () {
 
 });
 
+Route::get('logout_', function () {
+    auth()->logout();
+});
+
 
 Route::get('test', function () {
     return view('layouts.template.main');
@@ -61,3 +65,7 @@ require __DIR__ . '/auth.php';
 // ----------------------------------- Admin Panel Routes -----------------------------------
 
 require __DIR__ . '/admin/admin.php';
+
+// ----------------------------------- HR Panel Routes -----------------------------------
+
+require __DIR__ . '/hr/hr.php';
