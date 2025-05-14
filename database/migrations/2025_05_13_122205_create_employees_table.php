@@ -18,7 +18,7 @@ return new class extends Migration
 //            $table->string('first_name');
 //            $table->string('last_name')->nullable();
 //            $table->string('email')->unique();
-            $table->string('phone')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->string('designation')->nullable();
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('joining_date')->nullable();
             $table->decimal('salary', 10, 2)->nullable();
             $table->text('address')->nullable();
+            $table->text('image')->nullable();
             $table->string('status')->default('active'); // active/inactive
             $table->string('user_id')->nullable();
 

@@ -28,7 +28,7 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Account Details</div>
+                        <div class="card-header">Account Settings - Employee Account Creation</div>
                         <div class="card-body">
 
                             @if ($errors->any())
@@ -39,6 +39,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
+                                <br>
                             @endif
 
 
@@ -46,11 +47,10 @@
                                 <div class="alert alert-success">
                                     {{ session('success') }}
                                 </div>
+                                    <br>
                             @endif
 
-                            <br>
-
-                            <form method="post" action="{{ route('employee.store') }}">
+                            <form method="post" action="{{ route('employee.store') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                                 <!-- --------------------------------- Name & Email --------------------------------- -->
@@ -200,10 +200,11 @@
                                         <input
                                             class="form-control"
                                             id="inputFirstName"
-                                            type="text"
+                                            type="number"
                                             placeholder=""
                                             value=""
                                             name="salary"
+                                            min="0"
                                         />
                                     </div>
                                 </div>
@@ -241,14 +242,7 @@
                                         <label class="small mb-1" for="inputFirstName"
                                         >Image File</label
                                         >
-                                        <input
-                                            class="form-control"
-                                            id="inputFirstName"
-                                            type="file"
-                                            placeholder=""
-                                            value=""
-                                            name="image"
-                                        />
+                                        <input class="form-control" type="file" name="image">
                                     </div>
 
                                     <div class="col-md-6">

@@ -15,7 +15,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-
+        $employees = Employee::orderBy('id', 'desc')->get();
+        return view('panel.admin.employee.view', compact('employees'));
     }
 
     /**
@@ -31,13 +32,11 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-       $input = $request->validate([
+        $input = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-
-//            'employee_id' => 'required|string|unique:employees,employee_id',
-            'phone' => 'nullable|string|max:20',
+            'phone' => 'nullable|string|max:20|unique:employees',
             'date_of_birth' => 'nullable|date|before:today',
             'gender' => 'nullable|in:male,female,other',
             'designation' => 'nullable|string|max:100',
@@ -50,10 +49,11 @@ class EmployeeController extends Controller
             'role' => 'required|in:admin,hr,manager,employee',
         ]);
 
+
 //   ----------------------------- validation checkup -----------------------------
 
-        if (User::where('email',$input['email'])->exists()) {
-            session()->flash('error','Email already exists');
+        if (User::where('email', $input['email'])->exists()) {
+            session()->flash('error', 'Email already exists');
             return back();
         }
 
@@ -67,31 +67,31 @@ class EmployeeController extends Controller
 
 //  ----------------------------- Employee Creation -----------------------------
 
-        if ($request->hasFile('image')) {
-            $input['image'] = \request('image')->store('images', 'public');
+        // Handle image upload
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $input['image'] = $request->file('image')->store('images', 'public');
         }
 
-    Employee::created([
-        'user_id' => $user->id,
-        'employee_id' => $user->id,
-        'phone' => $input['phone'],
-        'date_of_birth' => $input['date_of_birth'],
-        'gender' => $input['gender'],
-        'designation' => $input['designation'],
-        'department' => $input['department'],
-        'joining_date' => $input['joining_date'],
-        'salary' => $input['salary'],
-        'address' => $input['address'],
-        'status' => $input['status'],
-        'role' => $input['role'],
-        'image' => $input['image'],
-    ]);
+        Employee::create([
+            'user_id' => $user->id,
+            'employee_id' => $user->id,
+            'phone' => $input['phone'],
+            'date_of_birth' => $input['date_of_birth'],
+            'gender' => $input['gender'],
+            'designation' => $input['designation'],
+            'department' => $input['department'],
+            'joining_date' => $input['joining_date'],
+            'salary' => $input['salary'],
+            'address' => $input['address'],
+            'status' => $input['status'],
+            'image' => $input['image'],
+        ]);
 
         // ---------------------- role setup based on input
 
         $user->assignRole($input['role']);
 
-        session()->flash('success','Employee added successfully');
+        session()->flash('success', 'Employee added successfully');
         return back();
 
     }
@@ -109,22 +109,75 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+//        $user = User::where('user_id', $employee->id)->first();
+        return view('panel.admin.employee.edit_employee', compact('employee'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        $user = $employee->user;
+
+        $input = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20|unique:employees,phone,' . $employee->id,
+            'date_of_birth' => 'nullable|date|before:today',
+            'gender' => 'nullable|in:male,female,other',
+            'designation' => 'nullable|string|max:100',
+            'department' => 'nullable|string|max:100',
+            'joining_date' => 'nullable|date',
+            'salary' => 'nullable|numeric|min:0',
+            'address' => 'nullable|string|max:1000',
+            'status' => 'required|in:active,inactive',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'role' => 'required|in:admin,hr,manager,employee',
+        ]);
+
+
+        // Update user
+        $user->update([
+            'name' => $input['name'],
+            'email' => $input['email'],
+        ]);
+
+        // Handle image upload
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $input['image'] = $request->file('image')->store('images', 'public');
+        } else {
+            $input['image'] = $employee->image;
+        }
+
+
+        // Update employee
+        $employee->update([
+            'phone' => $input['phone'],
+            'date_of_birth' => $input['date_of_birth'],
+            'gender' => $input['gender'],
+            'designation' => $input['designation'],
+            'department' => $input['department'],
+            'joining_date' => $input['joining_date'],
+            'salary' => $input['salary'],
+            'address' => $input['address'],
+            'status' => $input['status'],
+            'image' => $input['image'],
+        ]);
+
+        // Sync role
+        $user->syncRoles($input['role']);
+
+        return back()->with('success', 'Employee updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Employee $employee)
     {
-        //
+        return $employee;
     }
 }

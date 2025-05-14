@@ -25,6 +25,9 @@
         <a class="nav-link" href="{{ route('employee.create') }}"
         >Add Employee</a
         >
+        <a class="nav-link" href="{{ route('employee.index') }}"
+        >View All Employees</a
+        >
     </nav>
 </div>
 
