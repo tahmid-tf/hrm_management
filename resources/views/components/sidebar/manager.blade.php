@@ -1,5 +1,7 @@
 @if(auth()->user()->hasRole('manager'))
 
+    {{--  ------------------------------------------- Employee Management -------------------------------------------  --}}
+
     <a
         class="nav-link collapsed"
         href="javascript:void(0);"
@@ -20,10 +22,11 @@
         data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
-            <a class="nav-link" href=""
-            >Multi-Tenant Registration</a
-            >
+            <a class="nav-link" href="{{ route('manager_views_employees') }}"
+            >View All Employees</a>
         </nav>
     </div>
+
+    {{--  ------------------------------------------- Employee Management -------------------------------------------  --}}
 
 @endif

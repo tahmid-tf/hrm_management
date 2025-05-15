@@ -43,7 +43,6 @@
                                     <th>Salary</th>
                                     <th>Status</th>
                                     <th>Role</th>
-                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -57,7 +56,6 @@
                                     <th>Salary</th>
                                     <th>Status</th>
                                     <th>Role</th>
-                                    <th>Actions</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -81,37 +79,6 @@
                                             {{ $employee->user->roles->pluck('name')->implode(', ') }}
                                         </td>
 
-
-                                        {{--  ---------- If the users role is admin then hr won't be able to modify or remove data ---------- --}}
-
-                                        @if($employee->user->hasRole('admin'))
-                                            <td></td>
-                                        @else
-
-                                            <td>
-                                                <a href="{{ route('hr_employee.edit', $employee->id) }}"
-                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2">
-                                                    <i data-feather="edit"></i>
-                                                </a>
-
-                                                {{-- -------------------------------- Delete with confirmation -------------------------------- --}}
-
-                                                <form action="{{ route('hr_employee.destroy', $employee->id) }}"
-                                                      method="POST"
-                                                      class="d-inline"
-                                                      onsubmit="return confirm('Are you sure to delete this employee?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark">
-                                                        <i data-feather="trash-2"></i>
-                                                    </button>
-                                                </form>
-
-                                                {{-- -------------------------------- Delete with confirmation -------------------------------- --}}
-
-                                            </td>
-
-                                        @endif
 
                                     </tr>
                                 @endforeach

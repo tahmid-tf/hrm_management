@@ -41,9 +41,12 @@ Route::get('role', function () {
 
 });
 
+// ---------------------------------- log out ----------------------------------
+
 Route::get('logout_', function () {
     auth()->logout();
-});
+    return redirect('/');
+})->name('logout_');
 
 
 Route::get('test', function () {
@@ -69,3 +72,7 @@ require __DIR__ . '/admin/admin.php';
 // ----------------------------------- HR Panel Routes -----------------------------------
 
 require __DIR__ . '/hr/hr.php';
+
+// ----------------------------------- Manager Panel Routes -----------------------------------
+
+require __DIR__ . '/manager/manager.php';
