@@ -409,7 +409,8 @@
                 <div class="sidenav-footer-content">
                     <div class="sidenav-footer-subtitle">Logged in as:</div>
                     <div class="sidenav-footer-title">{{ auth()->user()->name ?? '' }}</div>
-                    <div class="sidenav-footer-title">{{ auth()->user()->roles->pluck('name')->map(fn($name) => ucfirst($name))->implode(', ') ?? '' }}</div>
+                    <div
+                        class="sidenav-footer-title">{{ auth()->user()->roles->pluck('name')->map(fn($name) => ucfirst($name))->implode(', ') ?? '' }}</div>
                 </div>
             </div>
         </nav>

@@ -101,7 +101,11 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        if (!$employee) {
+            return "Employee not found";
+        }
+
+        return view('panel.admin.employee.view_single_employee', compact('employee'));
     }
 
     /**

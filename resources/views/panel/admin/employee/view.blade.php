@@ -81,6 +81,12 @@
                                             {{ $employee->user->roles->pluck('name')->implode(', ') }}
                                         </td>
                                         <td>
+
+                                            <a href="{{ route('employee.show', $employee->id) }}"
+                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                                <i data-feather="eye"></i>
+                                            </a>
+
                                             <a href="{{ route('employee.edit', $employee->id) }}"
                                                class="btn btn-datatable btn-icon btn-transparent-dark me-2">
                                                 <i data-feather="edit"></i>

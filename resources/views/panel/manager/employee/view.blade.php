@@ -43,6 +43,8 @@
                                     <th>Salary</th>
                                     <th>Status</th>
                                     <th>Role</th>
+                                    <th>Actions</th>
+
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -56,6 +58,7 @@
                                     <th>Salary</th>
                                     <th>Status</th>
                                     <th>Role</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -77,6 +80,13 @@
                                         </td>
                                         <td>
                                             {{ $employee->user->roles->pluck('name')->implode(', ') }}
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('manager_employee.show', $employee->id) }}"
+                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                                <i data-feather="eye"></i>
+                                            </a>
                                         </td>
 
 

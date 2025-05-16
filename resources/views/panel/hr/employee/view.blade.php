@@ -89,6 +89,12 @@
                                         @else
 
                                             <td>
+
+                                                <a href="{{ route('hr_employee.show', $employee->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+
                                                 <a href="{{ route('hr_employee.edit', $employee->id) }}"
                                                    class="btn btn-datatable btn-icon btn-transparent-dark me-2">
                                                     <i data-feather="edit"></i>
