@@ -114,11 +114,9 @@
                                                 </form>
 
                                                 {{-- -------------------------------- Delete with confirmation -------------------------------- --}}
-
+                                                
                                             </td>
-
                                         @endif
-
                                     </tr>
                                 @endforeach
                                 </tbody>
