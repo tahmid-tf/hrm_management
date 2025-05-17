@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\TaskController;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -14,7 +16,7 @@ Route::get('/', function () {
 
 // --------------------------------------- Dashboard Redirection ---------------------------------------
 
-Route::get('/dashboard', [DashboardController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // --------------------------------------- Dashboard Redirection ---------------------------------------
 
@@ -50,7 +52,7 @@ Route::get('logout_', function () {
 
 
 Route::get('test', function () {
-    return view('layouts.template.main');
+    return view('panel.essential.kanban_board.kanban');
 });
 
 // ----------------------------------- Profile update -----------------------------------
@@ -76,3 +78,7 @@ require __DIR__ . '/hr/hr.php';
 // ----------------------------------- Manager Panel Routes -----------------------------------
 
 require __DIR__ . '/manager/manager.php';
+
+// ----------------------------------- Task Management Routes -----------------------------------
+
+Require __DIR__ . '/task_management.php';
