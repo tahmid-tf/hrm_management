@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'hr' => \App\Http\Middleware\HRMiddleware::class,
             'manager' => \App\Http\Middleware\ManagerMiddleware::class,
+            'employee' => \App\Http\Middleware\EmployeeMiddleware::class,
             'admin_hr' => \App\Http\Middleware\AdminAndHrMiddleware::class,
             'attendance_device_verification' => \App\Http\Middleware\AttendanceMiddleware::class,
         ]);

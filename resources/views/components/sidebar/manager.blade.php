@@ -38,7 +38,20 @@
         </div>
         Task Management
     </a>
-    
+
     {{--  ------------------------------------------- Task Management -------------------------------------------  --}}
 
+
+    {{--  ------------------------------------------- Attendances -------------------------------------------  --}}
+
+    <!-- Sidenav Link (Charts)-->
+    <a class="nav-link" href="{{ route('attendance_list_manager') }}">
+        <div class="nav-link-icon">
+            <i data-feather="bar-chart"></i>
+        </div>
+        Attendances
+    </a>
+
+
+    {{--  ------------------------------------------- Attendances -------------------------------------------  --}}
 @endif

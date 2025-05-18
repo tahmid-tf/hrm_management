@@ -399,6 +399,10 @@
 
                     <x-sidebar.manager></x-sidebar.manager>
 
+                    {{-- -------------- employee role -------------- --}}
+
+                    <x-sidebar.employee></x-sidebar.employee>
+
                     {{-- ---------------------------------------------- sidebar - Tahmid Ferdous ---------------------------------------------- --}}
 
 

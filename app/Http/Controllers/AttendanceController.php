@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+
 class AttendanceController extends Controller
 {
     // ------------------------------------------------ Employee attendance main function ------------------------------------------------
 
     public function toggle(Request $request)
     {
-        $request->validate([
-            'employee_id' => 'required|exists:users,id',
+        $input = $request->validate([
+            'employee_id' => 'required',
         ]);
+
+// --------------------------- checking if employee exists ---------------------------
+        
+        $user = User::find($input['employee_id']);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Employee not found',
+                'type' => 'error',
+            ], 404);
+        }
+
 
         $employeeId = $request->employee_id;
         $today = now()->toDateString();
@@ -66,9 +80,13 @@ class AttendanceController extends Controller
 
     public function index()
     {
-        $attendances = Attendance::with('employee')->get();
+        if (Auth::user()->hasRole('employee')) {
+            $attendances = Attendance::with('employee')->where('employee_id', \auth()->id())->get();
+        } else {
+            $attendances = Attendance::with('employee')->get();
+        }
+
         return view('panel.essential.attendance.view', compact('attendances'));
-//        return response()->json($attendances);
     }
 
 

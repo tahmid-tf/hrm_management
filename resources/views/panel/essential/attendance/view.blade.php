@@ -61,6 +61,7 @@
 
 
                                         {{-- -------------------------- Natural hour to minuite convertion -------------------------- --}}
+
                                         <td>
                                             @php
                                                 $hours = floor($attendance->working_hours);
@@ -82,13 +83,23 @@
                                             {{ $formattedTime }}
                                         </td>
 
+
                                         {{-- -------------------------- Natural hour to minuite convertion -------------------------- --}}
 
-                                        <td>
-                                            <a href="{{ route('attendance_edit', $attendance->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark" title="Edit">
-                                                <i data-feather="edit"></i>
-                                            </a>
-                                        </td>
+                                        @if(auth()->user()->hasRole('manager') || auth()->user()->hasRole('employee'))
+                                            <td></td>
+
+                                        @else
+
+                                            <td>
+                                                <a href="{{ route('attendance_edit', $attendance->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark" title="Edit">
+                                                    <i data-feather="edit"></i>
+                                                </a>
+                                            </td>
+
+                                        @endif
+
 
                                     </tr>
                                 @endforeach

@@ -13,3 +13,15 @@ Route::middleware(['auth', 'admin_hr'])->prefix('attendance')->group(function ()
     Route::put('/attendance_update/{id}', [AttendanceController::class, 'update'])->name('attendance_update');
 });
 
+
+// ------------------------------------ Attendance list for manager -----------------------------------
+
+Route::middleware(['auth', 'manager'])->prefix('attendance')->group(function () {
+    Route::get('/attendance_list', [AttendanceController::class, 'index'])->name('attendance_list_manager');
+});
+
+// ------------------------------------ Attendance list for employee -----------------------------------
+
+Route::middleware(['auth', 'employee'])->prefix('attendance')->group(function () {
+    Route::get('/attendance_list', [AttendanceController::class, 'index'])->name('attendance_list_employee');
+});

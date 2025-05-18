@@ -27,6 +27,12 @@ class DashboardController extends Controller
             return view('panel.manager.dashboard');
         }
 
+//   ----------------------------- If user is employee - Tahmid Ferdous -----------------------------
+
+        if (auth()->user()->hasRole('employee')) {
+            return view('panel.employee.dashboard');
+        }
+
         abort(403);
     }
 }
