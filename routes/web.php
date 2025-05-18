@@ -20,29 +20,6 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(
 
 // --------------------------------------- Dashboard Redirection ---------------------------------------
 
-// --------------------------- Spatie test ---------------------------
-
-Route::get('role', function () {
-
-//    $role = Role::create(['name' => 'admin']);
-//    $permission = Permission::create(['name' => 'edit articles']);
-
-//    $user = auth()->user();
-
-//    $user->assignRole('admin'); // role
-//    $user->givePermissionTo('edit articles'); // permission
-//    Role::find(1)->givePermissionTo('edit articles'); // giving permission to roles
-
-//    if ($user->hasRole('admin')) {
-//        // allow access
-//    }
-//
-//    if ($user->can('edit articles')) {
-//        // allow editing
-//    }
-
-});
-
 // ---------------------------------- log out ----------------------------------
 
 Route::get('logout_', function () {
@@ -63,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ----------------------------------- Auth Routes -----------------------------------
+// -------------------------------------- Auth Routes ---------------------------------------
 
 require __DIR__ . '/auth.php';
 
@@ -71,14 +48,18 @@ require __DIR__ . '/auth.php';
 
 require __DIR__ . '/admin/admin.php';
 
-// ----------------------------------- HR Panel Routes -----------------------------------
+// ------------------------------------ HR Panel Routes -------------------------------------
 
 require __DIR__ . '/hr/hr.php';
 
-// ----------------------------------- Manager Panel Routes -----------------------------------
+// ---------------------------------- Manager Panel Routes ----------------------------------
 
 require __DIR__ . '/manager/manager.php';
 
-// ----------------------------------- Task Management Routes -----------------------------------
+// --------------------------------- Task Management Routes ----------------------------------
 
-Require __DIR__ . '/task_management.php';
+require __DIR__ . '/task_management.php';
+
+// ------------------------------ Attendance Management Routes -------------------------------
+
+require __DIR__ . '/attendance/attendance.php';
