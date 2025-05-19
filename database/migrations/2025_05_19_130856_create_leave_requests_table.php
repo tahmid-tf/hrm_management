@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('leave_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('users')->onDelete('cascade');
-            $table->date('date');
-            $table->time('check_in_time')->nullable();
-            $table->time('check_out_time')->nullable();
-            $table->string('status')->default('Absent'); // Present, Absent, Late, Half-day
-            $table->decimal('working_hours', 5, 2)->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('leave_type'); // e.g. 'Sick', 'Casual', 'Annual', etc.
+            $table->text('reason')->nullable();
+            $table->enum('status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
+            $table->text('admin_comment')->nullable(); // Optional HR/Admin comment
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['employee_id', 'date']); // One attendance per employee per day
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('leave_requests');
     }
 };

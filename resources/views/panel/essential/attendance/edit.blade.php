@@ -31,6 +31,17 @@
                         <div class="card-header">Edit Attendance Data</div>
                         <div class="card-body">
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+
                             <form action="{{ route('attendance_update', $attendance->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
@@ -52,11 +63,6 @@
                                         <option value="absent" {{ old('status', $attendance->status) == 'absent' ? 'selected' : '' }}>Absent</option>
                                         <option value="late" {{ old('status', $attendance->status) == 'late' ? 'selected' : '' }}>Late</option>
                                     </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="working_hours" class="form-label">Working Hours</label>
-                                    <input type="number" name="working_hours" class="form-control" step="0.01" value="{{ old('working_hours', $attendance->working_hours) }}">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Update Attendance</button>
