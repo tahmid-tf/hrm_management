@@ -62,4 +62,6 @@ require __DIR__ . '/task_management.php';
 
 // ------------------------------ Attendance Management Routes -------------------------------
 
-require __DIR__ . '/attendance/attendance.php';
+require __DIR__ . '/attendance_and_leave/attendance.php';
+require __DIR__ . '/attendance_and_leave/leave_management.php';
+
