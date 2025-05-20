@@ -9,6 +9,6 @@ Route::middleware(['auth', 'admin_hr_manager'])->prefix('leave')->group(function
 
 // ------------------------------- view all leave notices -------------------------------
 
-    Route::resource('leave_notices',LeaveRequestController::class);
+    Route::resource('leave_notices', LeaveRequestController::class)->except(['edit', 'delete']);
 
 });

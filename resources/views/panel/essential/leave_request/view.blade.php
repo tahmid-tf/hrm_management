@@ -53,8 +53,8 @@
                                         <td>{{ $leave->end_date ?? '' }}</td>
                                         <td>{{ $leave->status ?? '' }}</td>
                                         <td>
-                                            <a href=""
-                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                            <a href="{{ route('leave_notices.show', $leave->id) }}"
+                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2" title="view request">
                                                 <i data-feather="eye" title="view"></i>
                                             </a>
                                         </td>

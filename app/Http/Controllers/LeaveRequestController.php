@@ -54,12 +54,21 @@ class LeaveRequestController extends Controller
     public function update(Request $request, $id)
     {
         $leave = LeaveRequest::findOrFail($id);
-        $request->validate([
-            'status' => 'required|in:Pending,Approved,Rejected'
+
+        if ($leave->status !== 'Pending') {
+            return back()->with('error', 'Action already taken on this request.');
+        }
+
+        $validated = $request->validate([
+            'admin_comment' => 'nullable|string|max:1000',
+            'action' => 'required|in:approve,reject',
         ]);
 
-        $leave->update(['status' => $request->status]);
+        $leave->status = $validated['action'] === 'approve' ? 'Approved' : 'Rejected';
+        $leave->admin_comment = $validated['admin_comment'];
+        $leave->save();
 
-        return back()->with('success', 'Leave status updated.');
+        return back()->with('success', 'Leave request has been ' . strtolower($leave->status) . '.');
     }
+
 }
