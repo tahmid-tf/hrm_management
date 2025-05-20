@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LeaveRequestSubmittedMail;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -36,14 +37,6 @@ class LeaveRequestController extends Controller
             'reason' => 'nullable|string',
         ]);
 
-        LeaveRequest::create([
-            'employee_id' => auth()->id(),
-            'start_date' => $validated['start_date'],
-            'end_date' => $validated['end_date'],
-            'leave_type' => $validated['leave_type'],
-            'reason' => $validated['reason'],
-        ]);
-
         // ---------------------- sending mail to admin and hr's ---------------------------------
 
         $users = \App\Models\User::whereHas('roles', function ($query) {
@@ -52,18 +45,28 @@ class LeaveRequestController extends Controller
 
 
         foreach ($users as $user) {
-            Mail::send('emails.leave_request', [
-                'user' => $user,
-                'leave_type' => $validated['leave_type'],
-                'start_date' => $validated['start_date'],
-                'end_date' => $validated['end_date'],
-                'reason' => $validated['reason'],
-                'submitted_by' => auth()->user()->name,
-            ], function ($message) use ($user) {
-                $message->to($user->email)
-                    ->subject('New Leave Request Submitted');
-            });
+
+            Mail::to($user->email)->send(new LeaveRequestSubmittedMail(
+                $user,
+                $validated['leave_type'],
+                $validated['start_date'],
+                $validated['end_date'],
+                $validated['reason'],
+                auth()->user()->name
+            ));
+
         }
+
+        // ---------------------- Insert leave request to database ---------------------------------
+
+        LeaveRequest::create([
+            'employee_id' => auth()->id(),
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'leave_type' => $validated['leave_type'],
+            'reason' => $validated['reason'],
+        ]);
+
 
         return redirect()->route('leave_notices.index')->with('success', 'Leave request submitted successfully.');
     }
@@ -107,17 +110,14 @@ class LeaveRequestController extends Controller
 
         $user = $leave->employee;
 
-        Mail::send('emails.leave_status_update', [
-            'user' => $user,
-            'status' => $leave->status,
-            'admin_comment' => $leave->admin_comment,
-            'leave_type' => $leave->leave_type,
-            'start_date' => $leave->start_date,
-            'end_date' => $leave->end_date,
-        ], function ($message) use ($user, $leave) {
-            $message->to($user->email)
-                ->subject('Your Leave Request has been ' . $leave->status);
-        });
+        Mail::to($user->email)->send(new LeaveRequestSubmittedMail(
+            $user,
+            $leave->status,
+            $leave->admin_comment,
+            $leave->leave_type,
+            $leave->start_date,
+            $leave->end_date
+        ));
 
 
         return back()->with('success', 'Leave request has been ' . strtolower($leave->status) . '.');

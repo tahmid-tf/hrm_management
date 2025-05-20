@@ -15,7 +15,7 @@
                                 <div class="page-header-icon">
                                     <i data-feather="user"></i>
                                 </div>
-                                Request For Leave Request
+                                Request For Leave
                             </h1>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Request For Leave Request</div>
+                        <div class="card-header">Request For Leave</div>
                         <div class="card-body">
 
 
