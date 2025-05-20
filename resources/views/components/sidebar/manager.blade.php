@@ -54,4 +54,38 @@
 
 
     {{--  ------------------------------------------- Attendances -------------------------------------------  --}}
+
+    {{--  ------------------------------------------- Leave Notices -------------------------------------------  --}}
+
+    <a
+        class="nav-link collapsed"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseLeave"
+        aria-expanded="false"
+        aria-controls="collapseLeave"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Leave Notices
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+    <div
+        class="collapse"
+        id="collapseLeave"
+        data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="{{ route('leave_notices.create') }}"
+            >Write Leave Notices</a
+            >
+            <a class="nav-link" href="{{ route('leave_notices.index') }}"
+            >View All Notices</a
+            >
+        </nav>
+    </div>
+
+
+    {{--  ------------------------------------------- Leave Notices -------------------------------------------  --}}
 @endif

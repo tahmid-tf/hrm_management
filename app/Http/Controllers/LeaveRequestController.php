@@ -53,6 +53,13 @@ class LeaveRequestController extends Controller
 
     public function update(Request $request, $id)
     {
+
+//        ----------------------------- If user is a manager or employee -----------------------------
+
+        if (auth()->user()->hasRole('manager') || auth()->user()->hasRole('employee')) {
+            return back()->with('error', 'You are not authorized to perform this action.');
+        }
+
         $leave = LeaveRequest::findOrFail($id);
 
         if ($leave->status !== 'Pending') {

@@ -23,6 +23,19 @@
         <div class="container-xl px-4 mt-4">
             <div class="row">
 
+
+                @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -89,6 +102,17 @@
                                             Reject
                                         </button>
                                     </div>
+
+                                    @if(auth()->user()->hasRole('manager') || auth()->user()->hasRole('employee'))
+
+                                        <div class="d-flex gap-2 pt-2">
+                                            <p style="color: red" class="text">* Approvals are only available for Admin
+                                                and HR</p>
+                                        </div>
+
+                                    @endif
+
+
                                 </form>
                             @endif
                         </div>
