@@ -10,7 +10,13 @@ class LeaveRequestController extends Controller
 
     public function index()
     {
-        $leaves = LeaveRequest::with('employee')->latest()->get();
+
+        if (auth()->user()->hasRole('employee')) {
+            $leaves = LeaveRequest::where('employee_id', auth()->id())->latest()->get();
+        }else{
+            $leaves = LeaveRequest::with('employee')->latest()->get();
+        }
+
         return view('panel.essential.leave_request.view', compact('leaves'));
     }
 
