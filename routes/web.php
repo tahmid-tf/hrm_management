@@ -29,7 +29,11 @@ Route::get('logout_', function () {
 
 
 Route::get('test', function () {
-    return view('panel.essential.kanban_board.kanban');
+
+//    $user = \App\Models\User::whereHas('roles', function ($query) {
+//        $query->where('name', 'admin');
+//    })->get();
+
 });
 
 // ----------------------------------- Profile update -----------------------------------

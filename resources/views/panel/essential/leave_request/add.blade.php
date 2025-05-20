@@ -32,6 +32,12 @@
                         <div class="card-body">
 
 
+                            @if(session('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
                             <form action="{{ route('leave_notices.store') }}" method="POST">
                                 @csrf
                                 <div class="mb-3">

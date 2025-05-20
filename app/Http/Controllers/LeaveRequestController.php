@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LeaveRequestController extends Controller
 {
@@ -13,7 +14,7 @@ class LeaveRequestController extends Controller
 
         if (auth()->user()->hasRole('employee')) {
             $leaves = LeaveRequest::where('employee_id', auth()->id())->latest()->get();
-        }else{
+        } else {
             $leaves = LeaveRequest::with('employee')->latest()->get();
         }
 
@@ -43,7 +44,28 @@ class LeaveRequestController extends Controller
             'reason' => $validated['reason'],
         ]);
 
-        return back()->with('success', 'Leave request submitted successfully.');
+        // ---------------------- sending mail to admin and hr's ---------------------------------
+
+        $users = \App\Models\User::whereHas('roles', function ($query) {
+            $query->whereIn('name', ['admin', 'hr']);
+        })->get();
+
+
+        foreach ($users as $user) {
+            Mail::send('emails.leave_request', [
+                'user' => $user,
+                'leave_type' => $validated['leave_type'],
+                'start_date' => $validated['start_date'],
+                'end_date' => $validated['end_date'],
+                'reason' => $validated['reason'],
+                'submitted_by' => auth()->user()->name,
+            ], function ($message) use ($user) {
+                $message->to($user->email)
+                    ->subject('New Leave Request Submitted');
+            });
+        }
+
+        return redirect()->route('leave_notices.index')->with('success', 'Leave request submitted successfully.');
     }
 
     public function show($id)
@@ -80,6 +102,23 @@ class LeaveRequestController extends Controller
         $leave->status = $validated['action'] === 'approve' ? 'Approved' : 'Rejected';
         $leave->admin_comment = $validated['admin_comment'];
         $leave->save();
+
+        // ------------------------------ Approval about leave request user will get a mail ------------------------------
+
+        $user = $leave->employee;
+
+        Mail::send('emails.leave_status_update', [
+            'user' => $user,
+            'status' => $leave->status,
+            'admin_comment' => $leave->admin_comment,
+            'leave_type' => $leave->leave_type,
+            'start_date' => $leave->start_date,
+            'end_date' => $leave->end_date,
+        ], function ($message) use ($user, $leave) {
+            $message->to($user->email)
+                ->subject('Your Leave Request has been ' . $leave->status);
+        });
+
 
         return back()->with('success', 'Leave request has been ' . strtolower($leave->status) . '.');
     }
