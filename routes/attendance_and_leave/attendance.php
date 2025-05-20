@@ -8,7 +8,7 @@ use App\Http\Controllers\AttendanceController;
 
 
 Route::middleware(['auth', 'admin_hr'])->prefix('attendance')->group(function () {
-    Route::get('/attendance_list', [AttendanceController::class, 'index'])->name('attendance_list_admin');
+    Route::get('/attendance_list', [AttendanceController::class, 'index'])->name('attendance_list');
     Route::get('/attendance_edit/{id}', [AttendanceController::class, 'edit'])->name('attendance_edit');
     Route::put('/attendance_update/{id}', [AttendanceController::class, 'update'])->name('attendance_update');
 });
