@@ -24,3 +24,9 @@ Route::middleware(['auth', 'manager'])->prefix('attendance')->group(function () 
 Route::middleware(['auth', 'employee'])->prefix('attendance')->group(function () {
     Route::get('/attendance_list_employee', [AttendanceController::class, 'index'])->name('attendance_list_employee');
 });
+
+// ------------------------------------ Attendance list export -----------------------------------
+
+Route::middleware(['auth', 'admin_hr_manager_employee'])->get('/attendance_list_export', [AttendanceController::class, 'export'])->name('attendance_list_export');
+
+

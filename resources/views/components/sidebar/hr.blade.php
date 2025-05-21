@@ -94,4 +94,8 @@
 
     {{--  ------------------------------------------- Leave Notices -------------------------------------------  --}}
 
+    {{-- ------------ Essential sidebar items ------------ --}}
+
+    <x-sidebar.essential></x-sidebar.essential>
+
 @endif

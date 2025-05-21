@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AttendanceListExport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
@@ -144,10 +146,18 @@ class AttendanceController extends Controller
 
         if (\auth()->user()->hasRole('admin') || \auth()->user()->hasRole('hr')) {
             return redirect()->route('attendance_list_admin')->with('success', 'Attendance updated successfully.');
-        }elseif (\auth()->user()->hasRole('manager')){
+        } elseif (\auth()->user()->hasRole('manager')) {
             return redirect()->route('attendance_list_manager')->with('success', 'Attendance updated successfully.');
-        }else{
+        } else {
             return redirect()->route('attendance_list_employee')->with('success', 'Attendance updated successfully.');
         }
     }
+
+    // ---------------------------------------------- Attendance list export ----------------------------------------------
+
+    public function export()
+    {
+        return Excel::download(new AttendanceListExport(),'attendance_list.xlsx');
+    }
+
 }
