@@ -60,9 +60,30 @@
                                         <td>{{ $leave->status ?? '' }}</td>
                                         <td>
                                             <a href="{{ route('leave_notices.show', $leave->id) }}"
-                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2" title="view request">
+                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                               title="view request">
                                                 <i data-feather="eye" title="view"></i>
                                             </a>
+
+
+                                            @if(auth()->user()->hasRole('admin'))
+
+                                                <form action="{{ route('leave_notices.destroy', $leave->id) }}"
+                                                      method="POST" style="display:inline;"
+                                                      onsubmit="return confirm('Are you sure you want to delete this leave request?')"
+                                                >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                            class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                            title="Delete request"
+                                                    >
+                                                        <i data-feather="trash-2"></i>
+                                                    </button>
+                                                </form>
+
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach

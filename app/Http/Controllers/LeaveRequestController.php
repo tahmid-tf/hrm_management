@@ -123,4 +123,22 @@ class LeaveRequestController extends Controller
         return back()->with('success', 'Leave request has been ' . strtolower($leave->status) . '.');
     }
 
+    public function destroy($id)
+    {
+        if (!auth()->user()->hasRole('admin')) {
+            return back()->with('error', 'You are not authorized to perform this action.');
+        }
+
+        $leave_request = LeaveRequest::find($id);
+
+        if (!$leave_request) {
+            return back()->with('error', 'Leave request not found.');
+        }
+
+        $leave_request->delete();
+
+        return back()->with('success', 'Leave request deleted successfully.');
+
+    }
+
 }
