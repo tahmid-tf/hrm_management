@@ -50,9 +50,16 @@ class AttendanceGraceTimeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AttendanceGraceTime $attendanceGraceTime)
+    public function update(Request $request)
     {
-        //
+        $attendanceGraceTime = AttendanceGraceTime::first();
+
+        $attendanceGraceTime->update([
+            'value' => $request->input('value'),
+        ]);
+
+        return redirect()->back()->with('success', 'Attendance grace time updated successfully');
+
     }
 
     /**

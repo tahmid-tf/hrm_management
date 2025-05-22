@@ -24,6 +24,66 @@
         </header>
         <!-- Main page content-->
         <div class="container-xl px-4 mt-4">
+
+            {{-- ----------------------------- attendance grace time setup ----------------------------- --}}
+
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+                <div class="row">
+                    <div class="col-xl-12">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-header">Attendance Grace Time</div>
+                            <div class="card-body">
+
+
+                                @if(session('success'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+
+
+                                <form
+                                    action="{{ route('attendance_grace_calculation.update', $attendance_grace_time->id) }}"
+                                    method="POST" class="mb-4">
+                                    @csrf
+                                    @method('put')
+
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body">
+                                            <div class="row g-3 align-items-end">
+
+                                                <div class="col-md-4">
+                                                    <label for="task-title" class="form-label">Attendance Grace Time
+                                                        <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="time" name="value" id="task-title" class="form-control"
+                                                           placeholder="" required
+                                                           value="{{ $attendance_grace_time->value ?? '' }}">
+                                                </div>
+
+                                                <div class="col-md-2 text-end">
+                                                    <button class="btn btn-primary w-100" type="submit">
+                                                        <i data-feather="plus-circle" class="me-1"></i> Update Grace
+                                                        Time
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @endif
+
+            {{-- ----------------------------- attendance grace time setup ----------------------------- --}}
+
             <div class="row">
                 <div class="col-xl-12">
                     <!-- Account details card-->

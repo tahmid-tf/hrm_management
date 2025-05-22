@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AttendanceGraceTime;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         3. Creating all necessary permissions
         4. Assigning role to user
         5. Assigning permission to user
+        6. Attendance grace time creation
          */
 
         $this->create_user_roles_permission_and_assign_roles_and_permissions();
@@ -74,5 +76,13 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('admin');
         $user->givePermissionTo('access_all');
+
+        // attendance grace time creation
+
+        AttendanceGraceTime::create([
+            'key' => 'attendance_grace_time',
+            'value' => '10:00:00',
+        ]);
+
     }
 }

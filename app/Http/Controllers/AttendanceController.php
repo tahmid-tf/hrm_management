@@ -118,13 +118,15 @@ class AttendanceController extends Controller
     public function index()
     {
 
+        $attendance_grace_time = AttendanceGraceTime::first();
+
         if (Auth::user()->hasRole('employee')) {
             $attendances = Attendance::with('employee')->where('employee_id', \auth()->id())->get();
         } else {
             $attendances = Attendance::with('employee')->get();
         }
 
-        return view('panel.essential.attendance.view', compact('attendances'));
+        return view('panel.essential.attendance.view', compact('attendances','attendance_grace_time'));
     }
 
 
