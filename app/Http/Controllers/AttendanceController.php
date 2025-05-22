@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AttendanceListExport;
+use App\Models\AttendanceGraceTime;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
@@ -10,12 +11,16 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 
+use App\Models\EnvironmentVariable;
+
+
 class AttendanceController extends Controller
 {
     // ------------------------------------------------ Employee attendance main function ------------------------------------------------
 
     public function toggle(Request $request)
     {
+
         $input = $request->validate([
             'employee_id' => 'required',
         ]);
@@ -44,6 +49,36 @@ class AttendanceController extends Controller
         if (!$attendance->exists || !$attendance->check_in_time) {
             $attendance->check_in_time = now();
             $attendance->status = 'Present';
+
+// ------------------------------------ Attendance grace time calculation --------------------------------------------
+
+
+            $attendance_grace = AttendanceGraceTime::where('key', 'attendance_grace_time')->first();
+
+            if ($attendance_grace) {
+                // Convert check-in time to Carbon instance
+                $checkInTime = Carbon::parse($attendance->check_in_time);
+
+                // Convert grace time to Carbon instance
+                $graceTime = Carbon::createFromFormat('H:i:s', $attendance_grace->value);
+
+                // Adjust grace time to match the date of check-in time
+                $graceTime = $checkInTime->copy()->setTime($graceTime->hour, $graceTime->minute, $graceTime->second);
+
+                // Check if check-in time is after grace time
+                $isLate = $checkInTime->greaterThan($graceTime);
+
+                if ($isLate) {
+                    $attendance->status = 'Late';
+                }
+            }else{
+                $attendance->status = 'Present';
+            }
+
+
+// ------------------------------------ Attendance grace time calculation --------------------------------------------
+
+
             $attendance->save();
 
             return response()->json([
@@ -157,7 +192,7 @@ class AttendanceController extends Controller
 
     public function export()
     {
-        return Excel::download(new AttendanceListExport(),'attendance_list.xlsx');
+        return Excel::download(new AttendanceListExport(), 'attendance_list.xlsx');
     }
 
 }
