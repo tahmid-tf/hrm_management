@@ -15,6 +15,8 @@ Route::middleware(['auth', 'admin_hr'])->prefix('attendance')->group(function ()
 
     // --------------------------------- Attendance grace time calculation ---------------------------------
     Route::resource('attendance_grace_calculation', AttendanceGraceTimeController::class)->only(['update']);
+
+
 });
 
 // ------------------------------------ Attendance list for manager -----------------------------------
@@ -31,6 +33,7 @@ Route::middleware(['auth', 'employee'])->prefix('attendance')->group(function ()
 
 // ------------------------------------ Attendance list export -----------------------------------
 
-Route::middleware(['auth', 'admin_hr_manager_employee'])->get('/attendance_list_export', [AttendanceController::class, 'export'])->name('attendance_list_export');
+Route::middleware(['auth', 'admin_hr_manager'])->get('/attendance_list_export', [AttendanceController::class, 'export'])->name('attendance_list_export');
+Route::middleware(['auth', 'admin_hr_manager'])->get('/individual_attendance_list_export/{id}', [AttendanceController::class, 'individual_export'])->name('attendance_individual_list_export');
 
 

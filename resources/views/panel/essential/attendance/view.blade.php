@@ -45,7 +45,7 @@
 
                                 <form
                                     action="{{ route('attendance_grace_calculation.update', $attendance_grace_time->id) }}"
-                                    method="POST" class="mb-4">
+                                    method="POST" class="mb-4" onsubmit="return confirm('Are you sure you want to update the grace time?')">
                                     @csrf
                                     @method('put')
 

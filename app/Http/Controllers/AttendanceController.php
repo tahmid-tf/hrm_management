@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AttendanceListExport;
+use App\Exports\IndividualAttendanceExport;
 use App\Models\AttendanceGraceTime;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -195,6 +196,19 @@ class AttendanceController extends Controller
     public function export()
     {
         return Excel::download(new AttendanceListExport(), 'attendance_list.xlsx');
+    }
+
+    // ---------------------------------------------- Attendance individual export ----------------------------------------------
+
+    public function individual_export($id){
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return "User data not found.";
+        }
+
+        return Excel::download(new IndividualAttendanceExport($id), 'attendance_list_individual.xlsx');
     }
 
 }

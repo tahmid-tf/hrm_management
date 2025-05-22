@@ -12,14 +12,23 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 
-class AttendanceListExport implements FromCollection, WithHeadings, ShouldAutoSize, WithMapping, WithStyles
+class IndividualAttendanceExport implements FromCollection, WithHeadings, ShouldAutoSize, WithMapping, WithStyles
 {
     /**
      * @return \Illuminate\Support\Collection
      */
+
+    public $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+
     public function collection()
     {
         return Attendance::select('id', 'employee_id', 'date', 'check_in_time', 'check_out_time', 'status', 'working_hours', 'created_at', 'updated_at')
+            ->where('employee_id', $this->id)
             ->orderBy('id', 'desc')
             ->get();
     }
@@ -114,5 +123,4 @@ class AttendanceListExport implements FromCollection, WithHeadings, ShouldAutoSi
         // Prevent selection issue
         $sheet->setSelectedCells('A1'); // Moves focus away from the "Late" cells
     }
-
 }

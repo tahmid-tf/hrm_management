@@ -85,7 +85,21 @@
                                         {{--  ---------- If the users role is admin then hr won't be able to modify or remove data ---------- --}}
 
                                         @if($employee->user->hasRole('admin'))
-                                            <td></td>
+
+                                            <td>
+                                                <a href="{{ route('hr_employee.show', $employee->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+
+                                                <a href="{{ route('attendance_individual_list_export', $employee->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                   title="Attendance List Export"
+                                                   onclick="return confirm('Confirm to export data?')">
+                                                    <i data-feather="download" title="Export Attendance Data"></i>
+                                                </a>
+                                            </td>
+
                                         @else
 
                                             <td>
@@ -98,6 +112,13 @@
                                                 <a href="{{ route('hr_employee.edit', $employee->id) }}"
                                                    class="btn btn-datatable btn-icon btn-transparent-dark me-2">
                                                     <i data-feather="edit"></i>
+                                                </a>
+
+                                                <a href="{{ route('attendance_individual_list_export', $employee->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                   title="Attendance List Export"
+                                                   onclick="return confirm('Confirm to export data?')">
+                                                    <i data-feather="download" title="Export Attendance Data"></i>
                                                 </a>
 
                                                 {{-- -------------------------------- Delete with confirmation -------------------------------- --}}

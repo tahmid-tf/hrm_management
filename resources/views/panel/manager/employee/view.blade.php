@@ -87,7 +87,16 @@
                                                class="btn btn-datatable btn-icon btn-transparent-dark me-2">
                                                 <i data-feather="eye"></i>
                                             </a>
+
+                                            <a href="{{ route('attendance_individual_list_export', $employee->id) }}"
+                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                               title="Attendance List Export"
+                                               onclick="return confirm('Confirm to export data?')">
+                                                <i data-feather="download" title="Export Attendance Data"></i>
+                                            </a>
                                         </td>
+
+
 
 
                                     </tr>
