@@ -25,8 +25,11 @@ A complete Human Resource Management (HRM) system built with **Laravel 11**, des
 - Employment status (active, resigned, terminated, etc.)
 
 ### ⏱️ 2. Attendance & Leave Management
-- Daily attendance tracking (manual entry or biometric integration)
+- Daily attendance tracking (biometric integration)
 - Leave request and approval system (sick leave, casual leave, paid leave)
+- Attendance report export functionality
+- Individual Attendance report export functionality
+- Auto marked a late and present report on Excel sheets
 
 [//]: # (- Holiday and work shift management)
 [//]: # (- Late arrivals and early departures tracking)

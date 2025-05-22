@@ -69,3 +69,6 @@ require __DIR__ . '/task_management.php';
 require __DIR__ . '/essential/attendance_and_leave/attendance.php';
 require __DIR__ . '/essential/attendance_and_leave/leave_management.php';
 
+// ------------------------------ Payroll & Salary Management -------------------------------
+
+require __DIR__ . '/essential/payroll_and_salary_management/payroll.php';
