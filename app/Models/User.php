@@ -62,4 +62,10 @@ class User extends Authenticatable
         return $this->hasMany(LeaveRequest::class, 'employee_id');
     }
 
+    public function salaryStructures()
+    {
+        return $this->hasMany(SalaryStructure::class, 'employee_id');
+    }
+
+
 }
