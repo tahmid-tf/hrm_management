@@ -42,8 +42,7 @@
                                             required {{ isset($increment) ? 'disabled' : '' }}>
                                         <option value="">-- Select Employee --</option>
                                         @foreach($employees as $employee)
-                                            <option value="{{ $employee->id }}"
-                                                {{ (old('employee_id') ?? $increment->employee_id ?? '') == $employee->id ? 'selected' : '' }}>
+                                            <option value="{{ $employee->id }}" {{ (old('employee_id') ?? $increment->employee_id ?? '') == $employee->id ? 'selected' : '' }}>
                                                 {{ $employee->name }} ({{ $employee->email }})
                                             </option>
                                         @endforeach

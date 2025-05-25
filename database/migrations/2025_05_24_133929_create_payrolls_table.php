@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('users')->onDelete('cascade');
-            $table->string('month'); // Format: YYYY-MM (e.g. 2025-05)
+            $table->date('month'); // Use 2025-05-01 format to represent month
             $table->decimal('basic_salary', 10, 2);
             $table->decimal('allowances', 10, 2)->default(0);
             $table->decimal('deductions', 10, 2)->default(0);
             $table->decimal('net_salary', 10, 2);
             $table->enum('status', ['Processed', 'Paid'])->default('Processed');
             $table->foreignId('processed_by')->constrained('users')->onDelete('cascade');
-            $table->softDeletes();
             $table->timestamps();
+
+            $table->unique(['employee_id', 'month']); // Avoid duplicate payroll for same month
+            $table->softDeletes();
         });
     }
 
