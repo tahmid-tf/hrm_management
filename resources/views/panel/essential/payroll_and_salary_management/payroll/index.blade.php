@@ -48,6 +48,7 @@
                                     <th>Status</th>
                                     <th>Processed By</th>
                                     <th>Processed At</th>
+                                    <th>Generate</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,6 +63,11 @@
                                         <td>{{ $payroll->status }}</td>
                                         <td>{{ $payroll->processor->name ?? 'N/A' }}</td>
                                         <td>{{ $payroll->created_at->format('d M Y') }}</td>
+                                        <td>
+                                            <a href="{{ route('payrolls.payslip', $payroll->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" onclick="return confirm('Are you sure you want to generate payslip?');">
+                                                <i data-feather="printer"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

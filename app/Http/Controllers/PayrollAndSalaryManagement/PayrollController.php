@@ -9,6 +9,8 @@ use App\Models\SalaryStructure;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class PayrollController extends Controller
 {
@@ -97,5 +99,21 @@ class PayrollController extends Controller
 //        $payroll->delete();
 //        return back()->with('success', 'Payroll deleted successfully.');
 //    }
+
+
+    public function generatePayslip(Payroll $payroll)
+    {
+        $payroll->load('employee');
+
+        // Safely assign formatted_month for view and filename
+        $formattedMonth = \Carbon\Carbon::parse($payroll->month)->format('F_Y'); // Use underscore for filename
+
+        $pdf = Pdf::loadView('panel.essential.payroll_and_salary_management.payslip.pdf', [
+            'payroll' => $payroll,
+            'formattedMonth' => \Carbon\Carbon::parse($payroll->month)->format('F Y') // For view
+        ]);
+
+        return $pdf->download('payslip_' . $payroll->employee->name . '_' . $formattedMonth . '.pdf');
+    }
 
 }

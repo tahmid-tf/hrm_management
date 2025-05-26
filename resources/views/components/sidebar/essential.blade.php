@@ -99,7 +99,7 @@
         aria-controls="collapsePayroll"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-        Payroll Creation
+        Payroll
         <div class="sidenav-collapse-arrow">
             <i class="fas fa-angle-down"></i>
         </div>

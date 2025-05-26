@@ -21,4 +21,9 @@ Route::middleware(['auth', 'admin_hr'])->prefix('salary')->group(function () {
     // ---------------- Salary Deduction -----------
 
     Route::resource('deductions', DeductionController::class);
+
+    // ---------------- Payslip creation ----------------
+
+    Route::get('/payrolls/{payroll}/payslip', [PayrollController::class, 'generatePayslip'])->name('payrolls.payslip');
+
 });
