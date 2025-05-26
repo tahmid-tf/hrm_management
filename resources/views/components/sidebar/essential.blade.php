@@ -60,6 +60,61 @@
     </div>
 
 
+    {{--  --------------------- Salary Deduction ---------------------  --}}
+
+    <a
+        class="nav-link collapsed"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseDeduction"
+        aria-expanded="false"
+        aria-controls="collapseDeduction"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Salary Deduction
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+    <div
+        class="collapse"
+        id="collapseDeduction"
+        data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="">Add/Edit Info</a>
+            <a class="nav-link" href="">View All</a>
+        </nav>
+    </div>
+
+
+    {{--  --------------------- Payroll ---------------------  --}}
+
+    <a
+        class="nav-link collapsed"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapsePayroll"
+        aria-expanded="false"
+        aria-controls="collapsePayroll"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Payroll Creation
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+    <div
+        class="collapse"
+        id="collapsePayroll"
+        data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="{{ route('payrolls.create') }}">Add/Edit Info</a>
+            <a class="nav-link" href="{{ route('payrolls.index') }}">View All</a>
+        </nav>
+    </div>
+
 @endif
 
 {{--  ------------------------------------------- Payroll & Salary Management -------------------------------------------  --}}
