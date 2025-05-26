@@ -82,8 +82,8 @@
         data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
-            <a class="nav-link" href="">Add/Edit Info</a>
-            <a class="nav-link" href="">View All</a>
+            <a class="nav-link" href="{{ route('deductions.create') }}">Add Info</a>
+            <a class="nav-link" href="{{ route('deductions.store') }}">View All</a>
         </nav>
     </div>
 
@@ -110,7 +110,7 @@
         data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
-            <a class="nav-link" href="{{ route('payrolls.create') }}">Add/Edit Info</a>
+            <a class="nav-link" href="{{ route('payrolls.create') }}">Add Info</a>
             <a class="nav-link" href="{{ route('payrolls.index') }}">View All</a>
         </nav>
     </div>

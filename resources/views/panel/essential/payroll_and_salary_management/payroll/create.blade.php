@@ -55,7 +55,10 @@
                                     @error('month') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
 
-                                <button type="submit" class="btn btn-success">Process Payroll</button>
+                                <button type="submit" class="btn btn-success"
+                                        onclick="return confirm('Are you sure to process payroll?')">Process Payroll
+                                </button>
+
                                 <a href="{{ route('payrolls.index') }}" class="btn btn-secondary">Cancel</a>
                             </form>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PayrollAndSalaryManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deduction;
 use App\Models\Payroll;
 use App\Models\SalaryStructure;
 use App\Models\User;
@@ -56,7 +57,19 @@ class PayrollController extends Controller
         // Calculate payroll amounts
         $basic = $structure->basic_salary;
         $allowances = $structure->housing_allowance + $structure->transport_allowance + $structure->other_allowances;
-        $deductions = 0; // (Can be extended later: absence, loan, etc.)
+        $deductions = 0;
+
+
+        // --------------------------- deduction calculation
+
+        $deduct_model = Deduction::where('employee_id', $validated['employee_id'])
+            ->where('month', $month)
+            ->first();
+
+        if ($deduct_model) {
+            $deductions = $deduct_model->amount;
+        }
+
         $net = $basic + $allowances - $deductions;
 
         Payroll::create([
@@ -72,5 +85,17 @@ class PayrollController extends Controller
 
         return redirect()->route('payrolls.index')->with('success', 'Payroll processed successfully.');
     }
+
+//    public function destroy($id)
+//    {
+//        $payroll = Payroll::find($id);
+//
+//        if (!$payroll){
+//            return back()->with('error', 'Payroll not found.');
+//        }
+//
+//        $payroll->delete();
+//        return back()->with('success', 'Payroll deleted successfully.');
+//    }
 
 }

@@ -70,7 +70,7 @@
                                               class="form-control">{{ old('reason', $increment->reason ?? '') }}</textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to {{ isset($increment) ? 'Update' : 'Save' }}?')">
                                     {{ isset($increment) ? 'Update' : 'Save' }}
                                 </button>
                                 <a href="{{ route('salary-increments.index') }}" class="btn btn-secondary">Cancel</a>

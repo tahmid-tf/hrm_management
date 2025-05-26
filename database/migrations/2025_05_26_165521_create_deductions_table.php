@@ -20,7 +20,6 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->text('remarks')->nullable();
             $table->foreignId('added_by')->constrained('users')->onDelete('cascade');
-            $table->timestamps();
 
             $table->index(['employee_id', 'month']);
 

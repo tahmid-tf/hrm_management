@@ -36,7 +36,7 @@
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
-                            <table class="dataTableSimple">
+                            <table id="datatablesSimple">
                                 <thead>
                                 <tr>
                                     <th>Employee</th>
@@ -61,7 +61,10 @@
                                                   onsubmit="return confirm('Are you sure you want to delete this deduction?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark me-2" title="Delete request">
+                                                    <i data-feather="trash-2"></i>
+                                                </button>
+
                                             </form>
                                         </td>
                                     </tr>
