@@ -48,21 +48,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// ----------------------------------- Admin Panel Routes -----------------------------------
+// --------------------------------- Employee Panel Routes ----------------------------------
 
-require __DIR__ . '/admin/admin.php';
-
-// ------------------------------------ HR Panel Routes -------------------------------------
-
-require __DIR__ . '/hr/hr.php';
-
-// ---------------------------------- Manager Panel Routes ----------------------------------
-
-require __DIR__ . '/manager/manager.php';
+require __DIR__ . '/essential/employee/employee.php';
 
 // --------------------------------- Task Management Routes ----------------------------------
 
-require __DIR__ . '/task_management.php';
+require __DIR__ . '/essential/task_management/task_management.php';
 
 // ------------------------------ Attendance Management Routes -------------------------------
 

@@ -7,14 +7,13 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class PayrollExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, ShouldQueue, WithChunkReading
+class PayrollExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithChunkReading
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return Payroll::all();
