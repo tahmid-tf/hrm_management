@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PayrollAndSalaryManagement;
 
+use App\Exports\PayrollExport;
 use App\Http\Controllers\Controller;
 use App\Models\Deduction;
 use App\Models\Payroll;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class PayrollController extends Controller
@@ -114,6 +116,11 @@ class PayrollController extends Controller
         ]);
 
         return $pdf->download('payslip_' . $payroll->employee->name . '_' . $formattedMonth . '.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PayrollExport(), 'payrolls.xlsx');
     }
 
 }

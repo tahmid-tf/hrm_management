@@ -26,4 +26,8 @@ Route::middleware(['auth', 'admin_hr'])->prefix('salary')->group(function () {
 
     Route::get('/payrolls/{payroll}/payslip', [PayrollController::class, 'generatePayslip'])->name('payrolls.payslip');
 
+    // ---------------- Payroll export ----------------
+
+    Route::get('/payrolls/export', [PayrollController::class, 'export'])->name('payrolls.export');
+
 });

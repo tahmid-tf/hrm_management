@@ -122,6 +122,8 @@
 
 {{--  ------------------------------------------- Export -------------------------------------------  --}}
 
+<div class="sidenav-menu-heading">Export Data</div>
+
 <a
     class="nav-link collapsed"
     href="javascript:void(0);"
@@ -143,9 +145,11 @@
 >
     <nav class="sidenav-menu-nested nav">
 
-        <a class="nav-link" href="{{ route('attendance_list_export') }}"
-        >Attendance Data Export</a
-        >
+        <a class="nav-link" href="{{ route('attendance_list_export') }}">Attendance Data Export</a>
+
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+            <a class="nav-link" href="{{ route('payrolls.export') }}">Payrolls Data Export</a>
+        @endif
     </nav>
 </div>
 
