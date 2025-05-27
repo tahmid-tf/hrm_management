@@ -31,14 +31,12 @@ A complete Human Resource Management (HRM) system built with **Laravel 11**, des
 - Individual Attendance report export functionality
 - Auto marked a late and present report on Excel sheets
 
-[//]: # (- Holiday and work shift management)
-[//]: # (- Late arrivals and early departures tracking)
 
 ### 💰 3. Payroll & Salary Management
 - Employee salary structure and increments
 - Payroll processing with tax and deductions
 - Payslip generation and download
-- Loan and advance salary management
+- Payroll data export
 
 ### 📥 4. Recruitment Management
 - Job posting and applicant tracking
@@ -82,12 +80,11 @@ A complete Human Resource Management (HRM) system built with **Laravel 11**, des
 
 ## 🚧 Currently Working On
 
-### ⏱️ Feature 2: Attendance & Leave Management
-- Daily attendance tracking
-- Leave request and approval system
-- Shift and holiday configuration
-- Late/early entry tracking
-
+### 💰 3. Payroll & Salary Management
+- Employee salary structure and increments
+- Payroll processing with tax and deductions
+- Payslip generation and download
+- Payroll data export
 ---
 
 ## 🛠️ Tech Stack

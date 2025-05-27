@@ -29,6 +29,16 @@
                         <div class="card-header">{{ isset($structure) ? 'Edit' : 'Create' }} Salary Structure</div>
                         <div class="card-body">
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <form method="POST" action="{{ isset($structure) ? route('salary-structure.update', $structure->id) : route('salary-structure.store') }}">
                                 @csrf
                                 @if(isset($structure))
