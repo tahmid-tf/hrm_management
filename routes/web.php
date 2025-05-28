@@ -64,3 +64,8 @@ require __DIR__ . '/essential/attendance_and_leave/leave_management.php';
 // ------------------------------ Payroll & Salary Management -------------------------------
 
 require __DIR__ . '/essential/payroll_and_salary_management/salary.php';
+
+// ------------------------------- Recruitment Management -----------------------------------
+
+require __DIR__ . '/essential/recruitment/recruitment.php';
+
