@@ -20,6 +20,11 @@ class PayrollController extends Controller
     public function index()
     {
         $payrolls = Payroll::with(['employee', 'processor'])->latest()->get();
+
+        if (auth()->user()->hasRole('manager') &&  auth()->user()->hasRole('employee')) {
+            $payrolls = Payroll::where('employee_id', auth()->id())->latest()->get();
+        }
+
         return view('panel.essential.payroll_and_salary_management.payroll.index', compact('payrolls'));
     }
 

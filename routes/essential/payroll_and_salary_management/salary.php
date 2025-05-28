@@ -31,3 +31,11 @@ Route::middleware(['auth', 'admin_hr'])->prefix('salary')->group(function () {
     Route::get('/payrolls/export', [PayrollController::class, 'export'])->name('payrolls.export');
 
 });
+
+
+// -------------------------------------------- Manager / employee will also view their payroll data --------------------------------------------
+
+Route::middleware(['auth', 'employee_manager'])->prefix('salary')->group(function () {
+    Route::get('/payrolls_data', [PayrollController::class, 'index'])->name('payrolls_data');
+    Route::get('/payrolls/{payroll}/payslip_data', [PayrollController::class, 'generatePayslip'])->name('payrolls.payslip_data');
+});
