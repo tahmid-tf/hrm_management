@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('department');
-            $table->string('job_type'); // full-time, part-time, contract
+            $table->string('type'); // full-time, part-time, contract
             $table->string('location');
             $table->enum('status', ['open', 'closed'])->default('open');
             $table->date('deadline');

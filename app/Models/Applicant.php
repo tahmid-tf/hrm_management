@@ -9,4 +9,9 @@ class Applicant extends Model
 {
     protected $guarded = [];
     use SoftDeletes;
+
+    public function jobPosting()
+    {
+        return $this->belongsTo(JobPosting::class);
+    }
 }

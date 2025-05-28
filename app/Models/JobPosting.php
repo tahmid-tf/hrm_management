@@ -8,4 +8,9 @@ class JobPosting extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class);
+    }
 }

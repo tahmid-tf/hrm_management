@@ -8,12 +8,12 @@
 @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
 
     <a
-        class="nav-link collapsed"
-        href="javascript:void(0);"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseStructure"
-        aria-expanded="false"
-        aria-controls="collapseStructure"
+            class="nav-link collapsed"
+            href="javascript:void(0);"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseStructure"
+            aria-expanded="false"
+            aria-controls="collapseStructure"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
         Salary Structure
@@ -22,9 +22,9 @@
         </div>
     </a>
     <div
-        class="collapse"
-        id="collapseStructure"
-        data-bs-parent="#accordionSidenav"
+            class="collapse"
+            id="collapseStructure"
+            data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('salary-structure.create') }}">Add/Edit Info</a>
@@ -35,12 +35,12 @@
     {{--  --------------------- Salary Increment ---------------------  --}}
 
     <a
-        class="nav-link collapsed"
-        href="javascript:void(0);"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseIncrement"
-        aria-expanded="false"
-        aria-controls="collapseIncrement"
+            class="nav-link collapsed"
+            href="javascript:void(0);"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseIncrement"
+            aria-expanded="false"
+            aria-controls="collapseIncrement"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
         Salary Increment
@@ -49,9 +49,9 @@
         </div>
     </a>
     <div
-        class="collapse"
-        id="collapseIncrement"
-        data-bs-parent="#accordionSidenav"
+            class="collapse"
+            id="collapseIncrement"
+            data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('salary-increments.create') }}">Add/Edit Info</a>
@@ -63,12 +63,12 @@
     {{--  --------------------- Salary Deduction ---------------------  --}}
 
     <a
-        class="nav-link collapsed"
-        href="javascript:void(0);"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseDeduction"
-        aria-expanded="false"
-        aria-controls="collapseDeduction"
+            class="nav-link collapsed"
+            href="javascript:void(0);"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseDeduction"
+            aria-expanded="false"
+            aria-controls="collapseDeduction"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
         Salary Deduction
@@ -77,9 +77,9 @@
         </div>
     </a>
     <div
-        class="collapse"
-        id="collapseDeduction"
-        data-bs-parent="#accordionSidenav"
+            class="collapse"
+            id="collapseDeduction"
+            data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('deductions.create') }}">Add Info</a>
@@ -91,12 +91,12 @@
     {{--  --------------------- Payroll ---------------------  --}}
 
     <a
-        class="nav-link collapsed"
-        href="javascript:void(0);"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapsePayroll"
-        aria-expanded="false"
-        aria-controls="collapsePayroll"
+            class="nav-link collapsed"
+            href="javascript:void(0);"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsePayroll"
+            aria-expanded="false"
+            aria-controls="collapsePayroll"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
         Payroll
@@ -105,9 +105,9 @@
         </div>
     </a>
     <div
-        class="collapse"
-        id="collapsePayroll"
-        data-bs-parent="#accordionSidenav"
+            class="collapse"
+            id="collapsePayroll"
+            data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('payrolls.create') }}">Add Info</a>
@@ -122,12 +122,12 @@
 @if(auth()->user()->hasRole('manager') || auth()->user()->hasRole('employee'))
 
     <a
-        class="nav-link collapsed"
-        href="javascript:void(0);"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapsePayroll"
-        aria-expanded="false"
-        aria-controls="collapsePayroll"
+            class="nav-link collapsed"
+            href="javascript:void(0);"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsePayroll"
+            aria-expanded="false"
+            aria-controls="collapsePayroll"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
         Payroll
@@ -136,9 +136,9 @@
         </div>
     </a>
     <div
-        class="collapse"
-        id="collapsePayroll"
-        data-bs-parent="#accordionSidenav"
+            class="collapse"
+            id="collapsePayroll"
+            data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('payrolls_data') }}">View All</a>
@@ -152,31 +152,36 @@
 
 {{--  ------------------------------------------- Recruitment Management -------------------------------------------  --}}
 
-<div class="sidenav-menu-heading">Recruitment Management</div>
+@if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('user'))
 
-<a
-    class="nav-link collapsed"
-    href="javascript:void(0);"
-    data-bs-toggle="collapse"
-    data-bs-target="#collapseJobPosting"
-    aria-expanded="false"
-    aria-controls="collapseJobPosting"
->
-    <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-    Jobs
-    <div class="sidenav-collapse-arrow">
-        <i class="fas fa-angle-down"></i>
+    <div class="sidenav-menu-heading">Recruitment Management</div>
+
+    <a
+            class="nav-link collapsed"
+            href="javascript:void(0);"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseJobPosting"
+            aria-expanded="false"
+            aria-controls="collapseJobPosting"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Jobs
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+    <div
+            class="collapse"
+            id="collapseJobPosting"
+            data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="{{ route('job-postings.create') }}">Add Jobs</a>
+            <a class="nav-link" href="{{ route('job-postings.index') }}">View All</a>
+        </nav>
     </div>
-</a>
-<div
-    class="collapse"
-    id="collapseJobPosting"
-    data-bs-parent="#accordionSidenav"
->
-    <nav class="sidenav-menu-nested nav">
-        <a class="nav-link" href="">View All</a>
-    </nav>
-</div>
+
+@endif
 
 
 {{--  ------------------------------------------- Recruitment Management -------------------------------------------  --}}
@@ -187,12 +192,12 @@
 <div class="sidenav-menu-heading">Export Data</div>
 
 <a
-    class="nav-link collapsed"
-    href="javascript:void(0);"
-    data-bs-toggle="collapse"
-    data-bs-target="#collapseExport"
-    aria-expanded="false"
-    aria-controls="collapseExport"
+        class="nav-link collapsed"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExport"
+        aria-expanded="false"
+        aria-controls="collapseExport"
 >
     <div class="nav-link-icon"><i data-feather="repeat"></i></div>
     Export
@@ -201,9 +206,9 @@
     </div>
 </a>
 <div
-    class="collapse"
-    id="collapseExport"
-    data-bs-parent="#accordionSidenav"
+        class="collapse"
+        id="collapseExport"
+        data-bs-parent="#accordionSidenav"
 >
     <nav class="sidenav-menu-nested nav">
 
