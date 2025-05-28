@@ -33,8 +33,10 @@
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
-                            <a href="{{ route('payrolls.create') }}" class="btn btn-primary mb-3">Process Payroll</a>
-
+                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+                                <a href="{{ route('payrolls.create') }}" class="btn btn-primary mb-3">Process
+                                    Payroll</a>
+                            @endif
 
                             <table id="datatablesSimple">
                                 <thead>
@@ -63,11 +65,26 @@
                                         <td>{{ $payroll->status }}</td>
                                         <td>{{ $payroll->processor->name ?? 'N/A' }}</td>
                                         <td>{{ $payroll->created_at->format('d M Y') }}</td>
-                                        <td>
-                                            <a href="{{ route('payrolls.payslip', $payroll->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" onclick="return confirm('Are you sure you want to generate payslip?');">
-                                                <i data-feather="printer"></i>
-                                            </a>
-                                        </td>
+
+                                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+                                            <td>
+                                                <a href="{{ route('payrolls.payslip', $payroll->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                   onclick="return confirm('Are you sure you want to generate payslip?');">
+                                                    <i data-feather="printer"></i>
+                                                </a>
+                                            </td>
+
+                                        @else
+                                            <td>
+                                                <a href="{{ route('payrolls.payslip_data', $payroll->id) }}"
+                                                   class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                   onclick="return confirm('Are you sure you want to generate payslip?');">
+                                                    <i data-feather="printer"></i>
+                                                </a>
+                                            </td>
+                                        @endif
+
                                     </tr>
                                 @endforeach
                                 </tbody>
