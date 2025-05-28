@@ -1,6 +1,6 @@
 {{--  ------------------------------------------- Payroll & Salary Management -------------------------------------------  --}}
 
-<div class="sidenav-menu-heading">Payroll & Salary Management</div>
+<div class="sidenav-menu-heading">Salary Management</div>
 
 {{--  --------------------- Salary Structure ---------------------  --}}
 
@@ -149,6 +149,37 @@
 
 
 {{--  ------------------------------------------- Payroll & Salary Management -------------------------------------------  --}}
+
+{{--  ------------------------------------------- Recruitment Management -------------------------------------------  --}}
+
+<div class="sidenav-menu-heading">Recruitment Management</div>
+
+<a
+    class="nav-link collapsed"
+    href="javascript:void(0);"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapseJobPosting"
+    aria-expanded="false"
+    aria-controls="collapseJobPosting"
+>
+    <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+    Jobs
+    <div class="sidenav-collapse-arrow">
+        <i class="fas fa-angle-down"></i>
+    </div>
+</a>
+<div
+    class="collapse"
+    id="collapseJobPosting"
+    data-bs-parent="#accordionSidenav"
+>
+    <nav class="sidenav-menu-nested nav">
+        <a class="nav-link" href="">View All</a>
+    </nav>
+</div>
+
+
+{{--  ------------------------------------------- Recruitment Management -------------------------------------------  --}}
 
 
 {{--  ------------------------------------------- Export -------------------------------------------  --}}
