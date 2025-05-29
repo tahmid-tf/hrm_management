@@ -12,6 +12,6 @@ class Applicant extends Model
 
     public function jobPosting()
     {
-        return $this->belongsTo(JobPosting::class);
+        return $this->belongsTo(JobPosting::class)->withTrashed();
     }
 }

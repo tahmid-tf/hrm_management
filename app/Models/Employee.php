@@ -13,6 +13,6 @@ class Employee extends Model
 
 //    --------------------------- Employee with user relation ---------------------------
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 }

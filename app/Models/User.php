@@ -54,17 +54,17 @@ class User extends Authenticatable
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class, 'employee_id');
+        return $this->hasMany(Attendance::class, 'employee_id')->withTrashed();
     }
 
     public function leaveRequests()
     {
-        return $this->hasMany(LeaveRequest::class, 'employee_id');
+        return $this->hasMany(LeaveRequest::class, 'employee_id')->withTrashed();
     }
 
     public function salaryStructures()
     {
-        return $this->hasMany(SalaryStructure::class, 'employee_id');
+        return $this->hasMany(SalaryStructure::class, 'employee_id')->withTrashed();
     }
 
 

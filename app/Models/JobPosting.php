@@ -11,6 +11,6 @@ class JobPosting extends Model
 
     public function applicants()
     {
-        return $this->hasMany(Applicant::class);
+        return $this->hasMany(Applicant::class)->withTrashed();
     }
 }
