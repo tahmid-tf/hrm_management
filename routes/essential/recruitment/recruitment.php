@@ -14,6 +14,11 @@ Route::middleware(['auth', 'admin_hr'])->prefix('recruitment')->group(function (
     // Applicants (Public or HR side)
     Route::resource('applicants', ApplicantController::class)->only(['index', 'show', 'destroy']);
 
+    // Applicants data export
+
+    Route::get('/applicants_data/export', [ApplicantController::class, 'export'])->name('applicants.export');
+
+    // clear all applicant's data
 });
 
 // ---------------------------------- public routes ----------------------------------

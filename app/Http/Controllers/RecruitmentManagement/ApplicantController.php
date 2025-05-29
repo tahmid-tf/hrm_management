@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\RecruitmentManagement;
 
+use App\Exports\ApplicantsDataExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\JobPosting;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ApplicantController extends Controller
 {
@@ -90,5 +92,10 @@ class ApplicantController extends Controller
 
         $applicant->delete();
         return redirect()->route('applicants.index')->with('success', 'Applicant deleted.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ApplicantsDataExport(), 'applicants.xlsx');
     }
 }
