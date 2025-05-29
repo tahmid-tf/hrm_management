@@ -13,7 +13,7 @@ class LeaveRequest extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'employee_id');
+        return $this->belongsTo(User::class, 'employee_id')->withTrashed();
     }
 
 }

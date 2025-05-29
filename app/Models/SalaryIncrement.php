@@ -12,11 +12,11 @@ class SalaryIncrement extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'employee_id');
+        return $this->belongsTo(User::class, 'employee_id')->withTrashed();
     }
 
     public function addedBy()
     {
-        return $this->belongsTo(User::class, 'added_by');
+        return $this->belongsTo(User::class, 'added_by')->withTrashed();
     }
 }

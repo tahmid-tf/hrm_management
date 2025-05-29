@@ -11,11 +11,11 @@ class Payroll extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'employee_id');
+        return $this->belongsTo(User::class, 'employee_id')->withTrashed();
     }
 
     public function processor()
     {
-        return $this->belongsTo(User::class, 'processed_by');
+        return $this->belongsTo(User::class, 'processed_by')->withTrashed();
     }
 }
