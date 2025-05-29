@@ -67,5 +67,8 @@ class User extends Authenticatable
         return $this->hasMany(SalaryStructure::class, 'employee_id')->withTrashed();
     }
 
-
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'employee_id');
+    }
 }
