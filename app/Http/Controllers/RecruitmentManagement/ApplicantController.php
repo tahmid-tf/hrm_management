@@ -98,4 +98,10 @@ class ApplicantController extends Controller
     {
         return Excel::download(new ApplicantsDataExport(), 'applicants.xlsx');
     }
+
+    public function clearAll()
+    {
+        Applicant::query()->delete();
+        return redirect()->route('applicants.index')->with('success', 'All applicants cleared successfully.');
+    }
 }

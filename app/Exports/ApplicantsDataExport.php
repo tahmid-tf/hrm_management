@@ -15,32 +15,32 @@ class ApplicantsDataExport implements FromCollection, WithHeadings, WithMapping,
      */
     public function collection()
     {
-        return Applicant::with('jobPosting')->get()->makeHidden(['created_at', 'updated_at']);
+        return Applicant::with('jobPosting')->get()->makeHidden(['updated_at']);
     }
 
     public function headings(): array
     {
         return [
-            'ID',
             'Job Title',
             'Name',
             'Email',
             'Phone',
             'resume',
-            'status'
+            'status',
+            'Submitted At',
         ];
     }
 
     public function map($applicant): array
     {
         return [
-            $applicant->id,
             $applicant->jobPosting->title,
             $applicant->name,
             $applicant->email,
             $applicant->phone,
             asset('storage/' . $applicant->resume),
             $applicant->status,
+            $applicant->created_at->format('d-m-Y'),
         ];
     }
 }

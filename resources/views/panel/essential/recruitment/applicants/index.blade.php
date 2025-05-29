@@ -28,6 +28,13 @@
                     <div class="card mb-4">
                         <div class="card-header">View Applicants</div>
                         <div class="card-body">
+
+                            @if(session('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
                             <table id="datatablesSimple">
                                 <thead>
                                 <tr>
@@ -44,7 +51,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($applicants as $index => $applicant)
+                                @foreach ($applicants as $index => $applicant)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $applicant->jobPosting->title }}</td>
@@ -74,15 +81,35 @@
                                                class="btn btn-datatable btn-icon btn-transparent-dark me-2">
                                                 <i data-feather="eye"></i>
                                             </a>
+
+                                            <form action="{{ route('applicants.destroy', $applicant->id) }}"
+                                                  method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                        onclick="return confirm('Are you sure you want to delete this applicant?')">
+                                                    <i data-feather="trash-2"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="8" class="text-center">No applicants found.</td>
-                                    </tr>
-                                @endforelse
+
+                                @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header">Application Settings</div>
+                        <div class="card-body">
+                            <a class="btn btn-primary" href="{{ route('applicants.export') }}">Export Data</a>
+                            <a class="btn btn-danger" href="{{ route('applicants.clearAll') }}"
+                               onclick="return confirm('Are you sure to clear all applicants data?')">Clear All Data</a>
                         </div>
                     </div>
                 </div>
