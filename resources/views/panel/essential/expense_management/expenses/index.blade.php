@@ -28,16 +28,34 @@
                     <div class="card mb-4">
                         <div class="card-header">All Expenses</div>
                         <div class="card-body">
-                            <a href="{{ route('expenses.create') }}" class="btn btn-primary mb-3">Add New Expense</a>
+
+
+                            <!-- Bulk Action Form Starts -->
+                            <form id="bulk-action-form" method="POST">
+                                @csrf
+
+                                <a href="{{ route('expenses.create') }}" class="btn btn-primary mb-3">Add New
+                                    Expense</a>
+                                <a href="#" onclick="submitForm('accept')" class="btn btn-success mb-3">Accept Selected
+                                    Expenses</a>
+                                <a href="#" onclick="submitForm('reject')" class="btn btn-danger mb-3">Reject Selected
+                                    Expenses</a>
+                            </form>
+                            <!-- Bulk Action Form Ends -->
 
                             @if(session('success'))
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
+                            @if(session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
+
                             <table id="datatablesSimple">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Select</th>
+                                    <th>Token</th>
                                     <th>Employee</th>
                                     <th>Category</th>
                                     <th>Amount</th>
@@ -50,7 +68,16 @@
                                 <tbody>
                                 @foreach($expenses as $expense)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <!-- This checkbox is now OUTSIDE the form, so we will use JS to move selected values into the form before submitting -->
+
+                                        @if($expense->status == 'pending')
+
+                                            <td><input type="checkbox" value="{{ $expense->id }}"
+                                                       class="expense-checkbox">
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        <td>#{{ $expense->id }}</td>
                                         <td>{{ $expense->employee->name }}</td>
                                         <td>{{ $expense->category->name }}</td>
                                         <td>{{ number_format($expense->amount, 2) }}</td>
@@ -58,12 +85,16 @@
                                         <td>{{ ucfirst($expense->status) }}</td>
                                         <td>{{ $expense->admin_comment ?? '-' }}</td>
                                         <td>
-                                            <a href="{{ route('expenses.show', $expense) }}" class="btn btn-sm btn-info">View</a>
-                                            <a href="{{ route('expenses.edit', $expense) }}" class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="{{ route('expenses.destroy', $expense) }}" method="POST" style="display:inline;">
+                                            <a href="{{ route('expenses.show', $expense) }}"
+                                               class="btn btn-sm btn-info">View</a>
+                                            <a href="{{ route('expenses.edit', $expense) }}"
+                                               class="btn btn-sm btn-warning">Edit</a>
+                                            <form action="{{ route('expenses.destroy', $expense) }}" method="POST"
+                                                  style="display:inline;">
                                                 @csrf @method('DELETE')
                                                 <button class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Are you sure?')">Delete</button>
+                                                        onclick="return confirm('Are you sure?')">Delete
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -78,6 +109,42 @@
 
             </div>
         </div>
+
+
+        <script>
+            function submitForm(actionType) {
+                const form = document.getElementById('bulk-action-form');
+
+                // Clear any old hidden inputs
+                form.querySelectorAll('input[name="selected_expenses[]"]').forEach(e => e.remove());
+
+                // Get selected checkboxes
+                const selected = document.querySelectorAll('.expense-checkbox:checked');
+                if (selected.length === 0) {
+                    alert('Please select at least one expense.');
+                    return;
+                }
+
+                // Add selected IDs to the form as hidden inputs
+                selected.forEach(cb => {
+                    const hidden = document.createElement('input');
+                    hidden.type = 'hidden';
+                    hidden.name = 'selected_expenses[]';
+                    hidden.value = cb.value;
+                    form.appendChild(hidden);
+                });
+
+                // Set the form action
+                if (actionType === 'accept') {
+                    form.action = "{{ route('expenses.bulkAccept') }}";
+                } else if (actionType === 'reject') {
+                    form.action = "{{ route('expenses.bulkReject') }}";
+                }
+
+                form.submit();
+            }
+        </script>
+
 
     </main>
 @endsection

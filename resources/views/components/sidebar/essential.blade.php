@@ -237,8 +237,8 @@
         data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
-            <a class="nav-link" href="">Add Jobs</a>
-            <a class="nav-link" href="">View All</a>
+            <a class="nav-link" href="{{ route('expenses.create') }}">Add Expenses</a>
+            <a class="nav-link" href="{{ route('expenses.index') }}">View All</a>
         </nav>
     </div>
 

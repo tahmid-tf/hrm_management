@@ -19,7 +19,7 @@ class ExpenseController extends Controller
     public function create()
     {
         $categories = ExpenseCategory::all();
-        return view('expenses.create', compact('categories'));
+        return view('panel.essential.expense_management.expenses.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -73,4 +73,47 @@ class ExpenseController extends Controller
         $expense->delete();
         return redirect()->route('expenses.index')->with('success', 'Expense deleted.');
     }
+
+    // --------------------------- Bulk accept expense ---------------------------
+    public function bulkAccept(Request $request)
+    {
+        $ids = $request->input('selected_expenses');
+
+        // Guard clause for empty selection
+        if (empty($ids) || !is_array($ids)) {
+            return back()->with('error', 'Please select at least one expense.');
+        }
+
+        $updated = Expense::whereIn('id', $ids)
+            ->where('status', 'pending')
+            ->update(['status' => 'approved']);
+
+        if ($updated > 0) {
+            return redirect()->route('expenses.index')->with('success', "$updated expense(s) accepted successfully.");
+        }
+
+        return redirect()->route('expenses.index')->with('error', 'No eligible expenses were found to accept.');
+    }
+
+    // --------------------------- Bulk reject expense ---------------------------
+
+    public function bulkReject(Request $request)
+    {
+        $ids = $request->input('selected_expenses');
+
+        if (empty($ids) || !is_array($ids)) {
+            return back()->with('error', 'Please select at least one expense.');
+        }
+
+        $updated = Expense::whereIn('id', $ids)
+            ->where('status', 'pending')
+            ->update(['status' => 'rejected']);
+
+        if ($updated > 0) {
+            return redirect()->route('expenses.index')->with('success', "$updated expense(s) rejected successfully.");
+        }
+
+        return redirect()->route('expenses.index')->with('error', 'No eligible expenses were found to reject.');
+    }
+
 }
