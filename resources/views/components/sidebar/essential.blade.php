@@ -212,6 +212,40 @@
 
 {{--  ------------------------------------------- Recruitment Management -------------------------------------------  --}}
 
+{{--  ------------------------------------------- Expense Management -------------------------------------------  --}}
+
+
+    <div class="sidenav-menu-heading">Expense Management</div>
+
+    <a
+        class="nav-link collapsed"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExpenseManagement"
+        aria-expanded="false"
+        aria-controls="collapseExpenseManagement"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Expense
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+    <div
+        class="collapse"
+        id="collapseExpenseManagement"
+        data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="">Add Jobs</a>
+            <a class="nav-link" href="">View All</a>
+        </nav>
+    </div>
+
+
+
+{{--  ------------------------------------------- Expense Management -------------------------------------------  --}}
+
 {{--  ------------------------------------------- Export -------------------------------------------  --}}
 
 <div class="sidenav-menu-heading">Export Data</div>

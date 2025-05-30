@@ -69,3 +69,6 @@ require __DIR__ . '/essential/payroll_and_salary_management/salary.php';
 
 require __DIR__ . '/essential/recruitment/recruitment.php';
 
+// ------------------------------- Expense Management ---------------------------------------
+
+require __DIR__ . '/essential/expense_management/expense_management.php';
