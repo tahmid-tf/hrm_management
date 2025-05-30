@@ -8,3 +8,4 @@ Route::middleware(['auth', 'admin_hr'])->prefix('expense')->group(function () {
 // ---------------------------------------- Expense routes ----------------------------------------
    Route::resource('expense', ExpenseController::class);
 });
+
