@@ -13,7 +13,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::with(['employee', 'category'])->latest()->get();
-        return view('expenses.index', compact('expenses'));
+        return view('panel.essential.expense_management.expenses.index', compact('expenses'));
     }
 
     public function create()
@@ -44,14 +44,14 @@ class ExpenseController extends Controller
 
     public function show(Expense $expense)
     {
-        return view('expenses.show', compact('expense'));
+        return view('panel.essential.expense_management.expenses.show', compact('expense'));
     }
 
     public function edit(Expense $expense)
     {
 //        $this->authorize('update', $expense); // optional policy
         $categories = ExpenseCategory::all();
-        return view('expenses.edit', compact('expense', 'categories'));
+        return view('panel.essential.expense_management.expenses.edit', compact('expense', 'categories'));
     }
 
     public function update(Request $request, Expense $expense)
