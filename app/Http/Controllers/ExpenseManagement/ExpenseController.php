@@ -19,7 +19,7 @@ class ExpenseController extends Controller
     public function create()
     {
         $categories = ExpenseCategory::all();
-        return view('expenses.create', compact('categories'));
+        return view('panel.essential.expense_management.expenses.create', compact('categories'));
     }
 
     public function store(Request $request)
