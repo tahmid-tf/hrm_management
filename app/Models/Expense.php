@@ -20,4 +20,9 @@ class Expense extends Model
         return $this->belongsTo(ExpenseCategory::class, 'category_id')->withTrashed();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'employee_id')->withTrashed();
+    }
+
 }
