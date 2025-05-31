@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ExpenseManagement;
 
+use App\Exports\ExpenseDataExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Expense;
@@ -9,6 +10,7 @@ use App\Models\ExpenseCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ExpenseApproval;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExpenseController extends Controller
 {
@@ -142,6 +144,13 @@ class ExpenseController extends Controller
         }
 
         return redirect()->route('expenses.index')->with('error', 'No eligible expenses were found to reject.');
+    }
+
+    // --------------------------- expense data export ---------------------------
+
+    public function export()
+    {
+        return Excel::download(new ExpenseDataExport(), 'expenses.xlsx');
     }
 
 }
