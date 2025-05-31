@@ -15,5 +15,7 @@ Route::middleware(['auth', 'admin_hr'])->prefix('expense')->group(function () {
     Route::post('expenses_data/bulk_reject', [ExpenseController::class,'bulkReject'])->name('expenses.bulkReject');
 
     Route::resource('expense-categories', ExpenseCategoryController::class);
+
+    Route::get('/expenses_data/export', [ExpenseController::class, 'export'])->name('expenses.export');
 });
 

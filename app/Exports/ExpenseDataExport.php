@@ -40,6 +40,9 @@ class ExpenseDataExport implements FromCollection, ShouldAutoSize, WithHeadings,
             $expense->category->name,
             $expense->amount,
             $expense->date,
+            $expense->description,
+            $expense->status,
+            $expense->created_at,
         ];
     }
 }
