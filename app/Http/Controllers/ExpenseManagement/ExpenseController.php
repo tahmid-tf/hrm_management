@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\ExpenseManagement;
 
+use App\Exports\ExpenseDataExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ExpenseApproval;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExpenseController extends Controller
 {
@@ -84,9 +88,22 @@ class ExpenseController extends Controller
             return back()->with('error', 'Please select at least one expense.');
         }
 
+        // Store eligible pending expenses before update
+        $pendingExpenses = Expense::whereIn('id', $ids)
+            ->where('status', 'pending')
+            ->get();
+
+        // Update status to approved
         $updated = Expense::whereIn('id', $ids)
             ->where('status', 'pending')
             ->update(['status' => 'approved']);
+
+        // Send emails after update
+        foreach ($pendingExpenses as $expense) {
+            if ($expense->user && $expense->user->email) {
+                Mail::to($expense->user->email)->send(new ExpenseApproval($expense, 'approved'));
+            }
+        }
 
         if ($updated > 0) {
             return redirect()->route('expenses.index')->with('success', "$updated expense(s) accepted successfully.");
@@ -105,15 +122,35 @@ class ExpenseController extends Controller
             return back()->with('error', 'Please select at least one expense.');
         }
 
+        // Get pending expenses before update
+        $pendingExpenses = Expense::whereIn('id', $ids)
+            ->where('status', 'pending')
+            ->get();
+
+        // Update their status to 'rejected'
         $updated = Expense::whereIn('id', $ids)
             ->where('status', 'pending')
             ->update(['status' => 'rejected']);
+
+        // Send rejection emails
+        foreach ($pendingExpenses as $expense) {
+            if ($expense->user && $expense->user->email) {
+                Mail::to($expense->user->email)->send(new ExpenseApproval($expense, 'rejected'));
+            }
+        }
 
         if ($updated > 0) {
             return redirect()->route('expenses.index')->with('success', "$updated expense(s) rejected successfully.");
         }
 
         return redirect()->route('expenses.index')->with('error', 'No eligible expenses were found to reject.');
+    }
+
+    // --------------------------- expense data export ---------------------------
+
+    public function export()
+    {
+        return Excel::download(new ExpenseDataExport(), 'expenses.xlsx');
     }
 
 }

@@ -299,11 +299,12 @@
 >
     <nav class="sidenav-menu-nested nav">
 
-        <a class="nav-link" href="{{ route('attendance_list_export') }}">Attendance Data Export</a>
+        <a class="nav-link" href="{{ route('attendance_list_export') }}">Attendance Export</a>
 
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
-            <a class="nav-link" href="{{ route('payrolls.export') }}">Payrolls Data Export</a>
-            <a class="nav-link" href="{{ route('applicants.export') }}">Applicants Data Export</a>
+            <a class="nav-link" href="{{ route('payrolls.export') }}">Payrolls Export</a>
+            <a class="nav-link" href="{{ route('applicants.export') }}">Applicants Export</a>
+            <a class="nav-link" href="{{ route('expenses.export') }}">Expense Export</a>
         @endif
     </nav>
 </div>
