@@ -14,7 +14,7 @@ class ExpenseCategoryController extends Controller
     public function index()
     {
         $categories = ExpenseCategory::all();
-        return view('expenses.categories.index', compact('categories'));
+        return view('panel.essential.expense_management.categories.index', compact('categories'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ExpenseCategoryController extends Controller
      */
     public function create()
     {
-        return view('expenses.categories.create');
+        return view('panel.essential.expense_management.categories.create');
     }
 
     /**
@@ -53,7 +53,9 @@ class ExpenseCategoryController extends Controller
      */
     public function edit(ExpenseCategory $expenseCategory)
     {
-        return view('expenses.categories.edit', compact('expenseCategory'));
+        return view('panel.essential.expense_management.categories.edit', [
+            'category' => $expenseCategory,
+        ]);
     }
 
     /**

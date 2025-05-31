@@ -12,12 +12,12 @@ class Expense extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'employee_id');
+        return $this->belongsTo(User::class, 'employee_id')->withTrashed();
     }
 
     public function category()
     {
-        return $this->belongsTo(ExpenseCategory::class, 'category_id');
+        return $this->belongsTo(ExpenseCategory::class, 'category_id')->withTrashed();
     }
 
 }

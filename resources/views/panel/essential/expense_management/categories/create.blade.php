@@ -11,7 +11,7 @@
                                 <div class="page-header-icon">
                                     <i data-feather="file-text"></i>
                                 </div>
-                                Expense Details
+                                Add New Expense Category
                             </h1>
                         </div>
                     </div>
@@ -26,18 +26,23 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Expense Details</div>
+                        <div class="card-header">Add New Expense Category</div>
                         <div class="card-body">
+                            <form action="{{ route('expense-categories.store') }}" method="POST">
+                                @csrf
 
-                            <p><strong>Employee:</strong> {{ $expense->employee->name }}</p>
-                            <p><strong>Category:</strong> {{ $expense->category->name }}</p>
-                            <p><strong>Amount:</strong> {{ number_format($expense->amount, 2) }}</p>
-                            <p><strong>Date:</strong> {{ $expense->expense_date }}</p>
-                            <p><strong>Description:</strong> {{ $expense->description ?? '-' }}</p>
-                            <p><strong>Status:</strong> {{ ucfirst($expense->status) }}</p>
-{{--                            <p><strong>Admin Comment:</strong> {{ $expense->admin_comment ?? '-' }}</p>--}}
-                            <a href="{{ route('expenses.index') }}" class="btn btn-secondary">Back</a>
+                                <div class="mb-3">
+                                    <label>Category Name</label>
+                                    <input type="text" name="name" class="form-control" required>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control"></textarea>
+                                </div>
+
+                                <button class="btn btn-success">Save</button>
+                            </form>
                         </div>
                     </div>
                 </div>

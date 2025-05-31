@@ -215,33 +215,61 @@
 {{--  ------------------------------------------- Expense Management -------------------------------------------  --}}
 
 
-    <div class="sidenav-menu-heading">Expense Management</div>
+<div class="sidenav-menu-heading">Expense Management</div>
 
+
+@if(auth()->user()->hasRole('admin'))
     <a
         class="nav-link collapsed"
         href="javascript:void(0);"
         data-bs-toggle="collapse"
-        data-bs-target="#collapseExpenseManagement"
+        data-bs-target="#collapseExpenseCategories"
         aria-expanded="false"
-        aria-controls="collapseExpenseManagement"
+        aria-controls="collapseExpenseCategories"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-        Expense
+        Categories
         <div class="sidenav-collapse-arrow">
             <i class="fas fa-angle-down"></i>
         </div>
     </a>
     <div
         class="collapse"
-        id="collapseExpenseManagement"
+        id="collapseExpenseCategories"
         data-bs-parent="#accordionSidenav"
     >
         <nav class="sidenav-menu-nested nav">
-            <a class="nav-link" href="{{ route('expenses.create') }}">Add Expenses</a>
-            <a class="nav-link" href="{{ route('expenses.index') }}">View All</a>
+            <a class="nav-link" href="">Add Categories</a>
+            <a class="nav-link" href="">View All</a>
         </nav>
     </div>
+@endif
 
+
+<a
+    class="nav-link collapsed"
+    href="javascript:void(0);"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapseExpenseManagement"
+    aria-expanded="false"
+    aria-controls="collapseExpenseManagement"
+>
+    <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+    Expense
+    <div class="sidenav-collapse-arrow">
+        <i class="fas fa-angle-down"></i>
+    </div>
+</a>
+<div
+    class="collapse"
+    id="collapseExpenseManagement"
+    data-bs-parent="#accordionSidenav"
+>
+    <nav class="sidenav-menu-nested nav">
+        <a class="nav-link" href="{{ route('expenses.create') }}">Add Expenses</a>
+        <a class="nav-link" href="{{ route('expenses.index') }}">View All</a>
+    </nav>
+</div>
 
 
 {{--  ------------------------------------------- Expense Management -------------------------------------------  --}}

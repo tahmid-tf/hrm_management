@@ -61,7 +61,7 @@
                                     <th>Amount</th>
                                     <th>Date</th>
                                     <th>Status</th>
-                                    <th>Admin Comment</th>
+{{--                                    <th>Admin Comment</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -83,7 +83,7 @@
                                         <td>{{ number_format($expense->amount, 2) }}</td>
                                         <td>{{ $expense->expense_date }}</td>
                                         <td>{{ ucfirst($expense->status) }}</td>
-                                        <td>{{ $expense->admin_comment ?? '-' }}</td>
+{{--                                        <td>{{ $expense->admin_comment ?? '-' }}</td>--}}
                                         <td>
                                             <a href="{{ route('expenses.show', $expense) }}"
                                                class="btn btn-sm btn-info">View</a>
