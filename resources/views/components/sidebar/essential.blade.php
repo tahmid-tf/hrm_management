@@ -276,10 +276,10 @@
 
 {{--  ------------------------------------------- Notice Management -------------------------------------------  --}}
 
-<div class="sidenav-menu-heading">Notice Management</div>
-
-
 @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+
+    <div class="sidenav-menu-heading">Notice Management</div>
+
     <a
         class="nav-link collapsed"
         href="javascript:void(0);"
@@ -305,6 +305,18 @@
         </nav>
     </div>
 @endif
+
+{{--  ------------------------- Notices for all -------------------------  --}}
+
+<div class="sidenav-menu-heading">Announcements</div>
+
+
+<a class="nav-link" href="{{ route('public_notice_data') }}">
+    <div class="nav-link-icon">
+        <i data-feather="bar-chart"></i>
+    </div>
+    Announcements
+</a>
 
 
 {{--  ------------------------------------------- Notice Management -------------------------------------------  --}}
