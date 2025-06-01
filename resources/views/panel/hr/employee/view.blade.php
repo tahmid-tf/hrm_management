@@ -31,6 +31,14 @@
                         <div class="card-header">Account Settings - View All Employees</div>
                         <div class="card-body">
 
+                            @if(session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
+
+                            @if(session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
+
                             <table id="datatablesSimple">
                                 <thead>
                                 <tr>
@@ -123,16 +131,16 @@
 
                                                 {{-- -------------------------------- Delete with confirmation -------------------------------- --}}
 
-                                                <form action="{{ route('hr_employee.destroy', $employee->id) }}"
-                                                      method="POST"
-                                                      class="d-inline"
-                                                      onsubmit="return confirm('Are you sure to delete this employee?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark">
-                                                        <i data-feather="trash-2"></i>
-                                                    </button>
-                                                </form>
+{{--                                                <form action="{{ route('hr_employee.destroy', $employee->id) }}"--}}
+{{--                                                      method="POST"--}}
+{{--                                                      class="d-inline"--}}
+{{--                                                      onsubmit="return confirm('Are you sure to delete this employee?');">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('DELETE')--}}
+{{--                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark">--}}
+{{--                                                        <i data-feather="trash-2"></i>--}}
+{{--                                                    </button>--}}
+{{--                                                </form>--}}
 
                                                 {{-- -------------------------------- Delete with confirmation -------------------------------- --}}
 

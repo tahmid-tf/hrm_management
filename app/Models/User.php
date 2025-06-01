@@ -69,6 +69,6 @@ class User extends Authenticatable
 
     public function expenses()
     {
-        return $this->hasMany(Expense::class, 'employee_id');
+        return $this->hasMany(Expense::class, 'employee_id')->withTrashed();
     }
 }
