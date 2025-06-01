@@ -35,4 +35,10 @@ class DashboardController extends Controller
 
         abort(403);
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
+    }
 }
