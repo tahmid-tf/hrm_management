@@ -104,4 +104,40 @@ class ApplicantController extends Controller
         Applicant::query()->delete();
         return redirect()->route('applicants.index')->with('success', 'All applicants cleared successfully.');
     }
+
+//    ------------------------- apply API route -------------------------
+
+    public function apply_for_jobs_api(Request $request)
+    {
+        $validated = $request->validate([
+            'job_posting_id' => 'required|exists:job_postings,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'resume' => 'required|file|mimes:pdf,doc,docx',
+        ]);
+
+        // Handle file upload
+        if ($request->hasFile('resume')) {
+            $resumePath = $request->file('resume')->store('resumes', 'public');
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Resume file is missing or invalid.',
+            ], 422);
+        }
+
+        Applicant::create([
+            'job_posting_id' => $validated['job_posting_id'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'resume' => $resumePath,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Application submitted successfully!',
+        ], 201);
+    }
 }

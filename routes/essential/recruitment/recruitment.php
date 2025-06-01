@@ -21,7 +21,3 @@ Route::middleware(['auth', 'admin_hr'])->prefix('recruitment')->group(function (
     Route::get('/applicants_data/clear_all', [ApplicantController::class, 'clearAll'])->name('applicants.clearAll');
 
 });
-
-// ---------------------------------- public routes ----------------------------------
-
-//Route::post('/applicants', [ApplicantController::class, 'store'])->name('applicants.store');
