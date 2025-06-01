@@ -28,10 +28,17 @@
                     <div class="card mb-4">
                         <div class="card-header">Notices</div>
                         <div class="card-body">
-                            <a href="{{ route('notices.create') }}" class="btn btn-primary mb-3">Create New Notice</a>
+                            <div>
+                                <a href="{{ route('notices.create') }}" class="btn btn-primary">Create New Notice</a>
+                                <a href="{{ route('clear_all_notices') }}" class="btn btn-danger">Clear all notice</a>
+                            </div>
+
                             @if(session('success'))
+                                <br>
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
+
+                            <br>
 
                             <table id="datatablesSimple">
                                 <thead>

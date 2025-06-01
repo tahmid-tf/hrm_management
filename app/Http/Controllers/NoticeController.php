@@ -87,6 +87,18 @@ class NoticeController extends Controller
             'published_at' => $request->status === 'published' ? now() : null,
         ]);
 
+        // Send mail only if notice is published
+        if ($notice->status === 'published') {
+            $roles = $request->visible_to_roles;
+
+            // Get users with those roles
+            $users = User::role($roles)->whereNotNull('email')->get();
+
+            foreach ($users as $user) {
+                Mail::to($user->email)->queue(new NoticePublished($notice));
+            }
+        }
+
         return redirect()->route('notices.index')->with('success', 'Notice updated successfully.');
     }
 
@@ -109,5 +121,11 @@ class NoticeController extends Controller
 
 
         return view('panel.essential.notice.public_notice', compact('notices'));
+    }
+
+    public function clearAll()
+    {
+        Notice::query()->delete();
+        return redirect()->route('notices.index')->with('success', 'Notice deleted successfully.');
     }
 }
