@@ -54,6 +54,7 @@ Employee roles. The system helps organizations manage employees, attendance, pay
 ### 📢 6. Notice Board & Announcements
 
 - Internal announcements
+- Automatic role to specific roles
 
 ### 📈 7. Reports & Analytics
 

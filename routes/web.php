@@ -13,10 +13,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test-mail-config', function () {
-    return config('mail.mailers.smtp');
-});
-
 
 // --------------------------------------- Dashboard Redirection ---------------------------------------
 
@@ -26,10 +22,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(
 
 // ---------------------------------- log out ----------------------------------
 
-Route::get('logout_', function () {
-    auth()->logout();
-    return redirect('/');
-})->name('logout_');
+Route::get('logout_', [DashboardController::class,'logout'])->name('logout_');
 
 // ----------------------------------- Profile update -----------------------------------
 
