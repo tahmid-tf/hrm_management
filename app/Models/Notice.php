@@ -10,6 +10,11 @@ class Notice extends Model
     use SoftDeletes;
     protected $guarded = [];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
+
     public function publisher()
     {
         return $this->belongsTo(User::class, 'published_by')->withTrashed();

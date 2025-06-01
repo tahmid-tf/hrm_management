@@ -11,14 +11,14 @@ class NoticeController extends Controller
     // Show all notices (Admin/HR view)
     public function index()
     {
-        $notices = Notice::latest()->paginate(10);
-        return view('notices.index', compact('notices'));
+        $notices = Notice::latest()->get();
+        return view('panel.essential.notice.index', compact('notices'));
     }
 
     // Show form to create a notice
     public function create()
     {
-        return view('notices.create');
+        return view('panel.essential.notice.create');
     }
 
     // Store new notice
@@ -31,10 +31,11 @@ class NoticeController extends Controller
             'status' => 'required|in:draft,published',
         ]);
 
+
         Notice::create([
             'title' => $request->title,
             'description' => $request->description,
-            'visible_to_roles' => $request->visible_to_roles,
+            'visible_to_roles' => json_encode($request->visible_to_roles),
             'status' => $request->status,
             'published_by' => Auth::id(),
             'published_at' => $request->status === 'published' ? now() : null,
@@ -46,13 +47,13 @@ class NoticeController extends Controller
     // Show single notice (admin/HR view)
     public function show(Notice $notice)
     {
-        return view('notices.show', compact('notice'));
+        return view('panel.essential.notice.show', compact('notice'));
     }
 
     // Show form to edit notice
     public function edit(Notice $notice)
     {
-        return view('notices.edit', compact('notice'));
+        return view('panel.essential.notice.edit', compact('notice'));
     }
 
     // Update notice
@@ -84,14 +85,14 @@ class NoticeController extends Controller
     }
 
     // Public view for all authenticated users
-    public function publicIndex()
-    {
-        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
-        $notices = Notice::where('status', 'published')
-            ->whereJsonContains('visible_to_roles', $userRole)
-            ->latest()
-            ->paginate(10);
-
-        return view('notices.public', compact('notices'));
-    }
+//    public function publicIndex()
+//    {
+//        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+//        $notices = Notice::where('status', 'published')
+//            ->whereJsonContains('visible_to_roles', $userRole)
+//            ->latest()
+//            ->paginate(10);
+//
+//        return view('notices.public', compact('notices'));
+//    }
 }
