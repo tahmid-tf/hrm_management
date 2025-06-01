@@ -27,15 +27,6 @@ Route::get('logout_', function () {
     return redirect('/');
 })->name('logout_');
 
-
-Route::get('test', function () {
-
-//    $user = \App\Models\User::whereHas('roles', function ($query) {
-//        $query->where('name', 'admin');
-//    })->get();
-
-});
-
 // ----------------------------------- Profile update -----------------------------------
 
 Route::middleware('auth')->group(function () {
@@ -72,3 +63,7 @@ require __DIR__ . '/essential/recruitment/recruitment.php';
 // ------------------------------- Expense Management ---------------------------------------
 
 require __DIR__ . '/essential/expense_management/expense_management.php';
+
+// ------------------------------- Notice Management ---------------------------------------
+
+require __DIR__ . '/essential/notice.php';

@@ -35,6 +35,12 @@ class ExpenseController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        $expense_category = ExpenseCategory::find(request('category_id'));
+
+        if(!$expense_category){
+            return back()->with('error', 'Invalid category data');
+        }
+
         Expense::create([
             'employee_id' => Auth::id(),
             'category_id' => $request->category_id,
@@ -66,6 +72,12 @@ class ExpenseController extends Controller
             'expense_date' => 'required|date',
             'description' => 'nullable|string',
         ]);
+
+        $expense_category = ExpenseCategory::find(request('category_id'));
+
+        if(!$expense_category){
+            return back()->with('error', 'Invalid category data');
+        }
 
         $expense->update($request->only('category_id', 'amount', 'expense_date', 'description'));
 

@@ -165,7 +165,7 @@
         aria-controls="collapseJobPosting"
     >
         <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-        Jobs
+        Job Advertisement
         <div class="sidenav-collapse-arrow">
             <i class="fas fa-angle-down"></i>
         </div>
@@ -273,6 +273,41 @@
 
 
 {{--  ------------------------------------------- Expense Management -------------------------------------------  --}}
+
+{{--  ------------------------------------------- Notice Management -------------------------------------------  --}}
+
+<div class="sidenav-menu-heading">Notice Management</div>
+
+
+@if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+    <a
+        class="nav-link collapsed"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseNotice"
+        aria-expanded="false"
+        aria-controls="collapseNotice"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Notices
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+    <div
+        class="collapse"
+        id="collapseNotice"
+        data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="{{ route('notices.create') }}">Add Notices</a>
+            <a class="nav-link" href="{{ route('notices.index') }}">View All</a>
+        </nav>
+    </div>
+@endif
+
+
+{{--  ------------------------------------------- Notice Management -------------------------------------------  --}}
 
 {{--  ------------------------------------------- Export -------------------------------------------  --}}
 
