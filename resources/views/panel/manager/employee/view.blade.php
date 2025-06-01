@@ -31,6 +31,14 @@
                         <div class="card-header">Account Settings - View All Employees</div>
                         <div class="card-body">
 
+                            @if(session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
+
+                            @if(session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
+
                             <table id="datatablesSimple">
                                 <thead>
                                 <tr>

@@ -16,7 +16,18 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::orderBy('id', 'desc')->get();
+
+        if (auth()->user()->hasRole('hr')) {
+            return view('panel.hr.employee.view', compact('employees'));
+        }
+
+        if (auth()->user()->hasRole('manager')) {
+            return view('panel.manager.employee.view', compact('employees'));
+        }
+
         return view('panel.admin.employee.view', compact('employees'));
+
+
     }
 
     /**
@@ -99,8 +110,11 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
+
+        $employee = Employee::find($id);
+
         if (!$employee) {
             return "Employee not found";
         }
@@ -111,9 +125,16 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
+        $employee = Employee::find($id);
+
 //        $user = User::where('user_id', $employee->id)->first();
+        if (auth()->user()->hasRole('hr')) {
+            return view('panel.hr.employee.edit_employee', compact('employee'));
+        }
+
+
         return view('panel.admin.employee.edit_employee', compact('employee'));
     }
 
@@ -122,6 +143,11 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // only admin and hr can edit employees.
+        if (!auth()->user()->hasAnyRole(['admin', 'hr'])) {
+            return back()->with('error', 'Only admin and HR can edit employees.');
+        };
+
         $employee = Employee::findOrFail($id);
         $user = $employee->user;
 
@@ -182,6 +208,17 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+
+        // admin cannot remove himself/herself from the system.
+        if (auth()->id() == $id) {
+            return back()->with('success', 'Admin cannot remove himself/herself from the system.');
+        }
+
+        // only admin can delete employees.
+        if (!auth()->user()->hasRole('admin')) {
+            return back()->with('success', 'Only admin can delete employees.');
+        }
+
         $employee = Employee::find($id);
 
         if (!$employee) {
