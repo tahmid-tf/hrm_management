@@ -14,7 +14,6 @@ class JobPostingController extends Controller
     public function index()
     {
         $jobPostings = JobPosting::latest()->get();
-
         return view('panel.essential.recruitment.job_postings.index', compact('jobPostings'));
     }
 
@@ -93,4 +92,26 @@ class JobPostingController extends Controller
         $jobPosting->delete();
         return redirect()->route('job-postings.index')->with('success', 'Job post deleted successfully.');
     }
+
+    // ------------------------ job posts API ------------------------
+
+
+    public function jobs_api()
+    {
+        $jobPostings = JobPosting::latest()->paginate(10);
+        return response()->json([
+            'data' => $jobPostings,
+        ],200);
+    }
+
+    public function jobs_api_single($id)
+    {
+        $jobPostings = JobPosting::where('id',$id)->latest()->paginate(10);
+        return response()->json([
+            'data' => $jobPostings,
+        ],200);
+    }
+
+
+
 }
