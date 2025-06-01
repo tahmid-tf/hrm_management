@@ -19,9 +19,10 @@ class PayrollController extends Controller
     // Show all payrolls
     public function index()
     {
+
         $payrolls = Payroll::with(['employee', 'processor'])->latest()->get();
 
-        if (auth()->user()->hasRole('manager') &&  auth()->user()->hasRole('employee')) {
+        if (auth()->user()->hasRole('manager') || auth()->user()->hasRole('employee')) {
             $payrolls = Payroll::where('employee_id', auth()->id())->latest()->get();
         }
 

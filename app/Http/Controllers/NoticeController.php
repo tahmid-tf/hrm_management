@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NoticePublished;
 use App\Models\Notice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class NoticeController extends Controller
 {
@@ -31,8 +34,7 @@ class NoticeController extends Controller
             'status' => 'required|in:draft,published',
         ]);
 
-
-        Notice::create([
+        $notice = Notice::create([
             'title' => $request->title,
             'description' => $request->description,
             'visible_to_roles' => json_encode($request->visible_to_roles),
@@ -41,10 +43,21 @@ class NoticeController extends Controller
             'published_at' => $request->status === 'published' ? now() : null,
         ]);
 
+        // Send mail only if notice is published
+        if ($notice->status === 'published') {
+            $roles = $request->visible_to_roles;
+
+            // Get users with those roles
+            $users = User::role($roles)->whereNotNull('email')->get();
+
+            foreach ($users as $user) {
+                Mail::to($user->email)->queue(new NoticePublished($notice));
+            }
+        }
+
         return redirect()->route('notices.index')->with('success', 'Notice created successfully.');
     }
 
-    // Show single notice (admin/HR view)
     public function show(Notice $notice)
     {
         return view('panel.essential.notice.show', compact('notice'));
@@ -85,14 +98,16 @@ class NoticeController extends Controller
     }
 
     // Public view for all authenticated users
-//    public function publicIndex()
-//    {
-//        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
-//        $notices = Notice::where('status', 'published')
-//            ->whereJsonContains('visible_to_roles', $userRole)
-//            ->latest()
-//            ->paginate(10);
-//
-//        return view('notices.public', compact('notices'));
-//    }
+    public function publicIndex()
+    {
+        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+
+        $notices = Notice::where('status', 'published')
+            ->whereJsonContains('visible_to_roles', $userRole)
+            ->latest()
+            ->paginate(10);
+
+
+        return view('panel.essential.notice.public_notice', compact('notices'));
+    }
 }

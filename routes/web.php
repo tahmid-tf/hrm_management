@@ -13,6 +13,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test-mail-config', function () {
+    return config('mail.mailers.smtp');
+});
+
 
 // --------------------------------------- Dashboard Redirection ---------------------------------------
 

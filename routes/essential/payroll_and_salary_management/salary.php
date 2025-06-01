@@ -39,3 +39,5 @@ Route::middleware(['auth', 'employee_manager'])->prefix('salary')->group(functio
     Route::get('/payrolls_data', [PayrollController::class, 'index'])->name('payrolls_data');
     Route::get('/payrolls/{payroll}/payslip_data', [PayrollController::class, 'generatePayslip'])->name('payrolls.payslip_data');
 });
+
+// -------------------------------------------- Payroll data for employees --------------------------------------------
