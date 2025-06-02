@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\PayrollAndSalaryManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Payroll;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\SalaryStructure;
+use Illuminate\Support\Facades\DB;
 
 class SalaryStructureController extends Controller
 {
@@ -82,6 +84,23 @@ class SalaryStructureController extends Controller
         );
 
         return redirect()->route('salary-structure.index')->with('success', 'Salary structure updated.');
+    }
+
+    // ------------------------------------------- Api Routes
+
+    public function salary_structure_api()
+    {
+        $monthlyNetSalaries = Payroll::select(
+            DB::raw("DATE_FORMAT(month, '%Y-%m') as month"),
+            DB::raw("SUM(net_salary) as total_net_salary")
+        )
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->get();
+
+        return response()->json([
+            'data' => $monthlyNetSalaries,
+        ], 200);
     }
 
 }

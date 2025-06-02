@@ -19,3 +19,10 @@ Route::middleware(['auth', 'admin_hr'])->prefix('expense')->group(function () {
     Route::get('/expenses_data/export', [ExpenseController::class, 'export'])->name('expenses.export');
 });
 
+
+// -------------------------------------------- Payroll data for employees --------------------------------------------
+
+Route::middleware(['auth', 'admin_hr_manager'])->group(function () {
+    Route::get('/expense_structure_api', [ExpenseController::class, 'expense_structure_api']);
+});
+

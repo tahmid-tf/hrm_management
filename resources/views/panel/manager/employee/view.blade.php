@@ -42,43 +42,32 @@
                             <table id="datatablesSimple">
                                 <thead>
                                 <tr>
+                                    <th>Employee ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Designation</th>
                                     <th>Department</th>
                                     <th>Phone</th>
                                     <th>Joining Date</th>
-                                    <th>Salary</th>
+{{--                                    <th>Salary</th>--}}
                                     <th>Status</th>
                                     <th>Role</th>
                                     <th>Actions</th>
 
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Designation</th>
-                                    <th>Department</th>
-                                    <th>Phone</th>
-                                    <th>Joining Date</th>
-                                    <th>Salary</th>
-                                    <th>Status</th>
-                                    <th>Role</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </tfoot>
+
                                 <tbody>
                                 @foreach($employees as $employee)
                                     <tr>
+                                        <td>{{ $employee->user->id }}</td>
                                         <td>{{ $employee->user->name }}</td>
                                         <td>{{ $employee->user->email }}</td>
                                         <td>{{ $employee->designation }}</td>
                                         <td>{{ $employee->department }}</td>
                                         <td>{{ $employee->phone }}</td>
                                         <td>{{ \Carbon\Carbon::parse($employee->joining_date)->format('Y-m-d') }}</td>
-                                        <td>{{ number_format($employee->salary, 2) }}/-</td>
+{{--                                        <td>{{ number_format($employee->salary, 2) }}/-</td>--}}
                                         <td>
                                             @if($employee->status == 'active')
                                                 <span class="badge bg-success text-white rounded-pill">Active</span>

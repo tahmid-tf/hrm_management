@@ -165,4 +165,18 @@ class ExpenseController extends Controller
         return Excel::download(new ExpenseDataExport(), 'expenses.xlsx');
     }
 
+    // --------------------------- expense structure api ----------------------------
+
+    public function expense_structure_api()
+    {
+        $expenses = Expense::selectRaw('DATE_FORMAT(expense_date, "%Y-%m") as month, SUM(amount) as total_expense')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        return response()->json([
+            'data' => $expenses,
+        ], 200);
+    }
+
 }

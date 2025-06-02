@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\PayrollAndSalaryManagement\SalaryStructureController;
 use App\Http\Controllers\RecruitmentManagement\JobPostingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RecruitmentManagement\ApplicantController;
+use App\Http\Middleware\AdminHrManagerMiddleware;
 
 
 Route::get('/user', function (Request $request) {
@@ -25,3 +27,5 @@ Route::prefix('recruitment')->group(function () {
     Route::get('/job_posts_api/{id}', [JobPostingController::class, 'jobs_api_single'])->name('job_posts_single');
     Route::post('/apply_for_jobs', [ApplicantController::class, 'apply_for_jobs_api']);
 });
+
+
