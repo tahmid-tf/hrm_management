@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\Notice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -12,7 +15,25 @@ class DashboardController extends Controller
 //   ----------------------------- If user is an admin - Tahmid Ferdous -----------------------------
 
         if (auth()->user()->hasRole('admin')) {
-            return view('panel.admin.dashboard');
+
+            // -------------------- Attendances  --------------------
+
+            if (Auth::user()->hasRole('employee')) {
+                $attendances = Attendance::with('employee')->where('employee_id', \auth()->id())->get();
+            } else {
+                $attendances = Attendance::with('employee')->get();
+            }
+
+            // -------------------- Announcements  --------------------
+
+            $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+
+            $notices = Notice::where('status', 'published')
+                ->whereJsonContains('visible_to_roles', $userRole)
+                ->latest()
+                ->get();
+
+            return view('panel.admin.dashboard', compact('attendances','notices'));
         }
 
 //   ----------------------------- If user is a hr - Tahmid Ferdous -----------------------------

@@ -18874,7 +18874,7 @@ body {
   transform: translateX(0.5625rem);
 }
 .timeline.timeline-xs .timeline-item .timeline-item-marker .timeline-item-marker-text {
-  width: 3rem;
+  width: 5rem;
   font-size: 0.7rem;
 }
 .timeline.timeline-xs .timeline-item .timeline-item-marker .timeline-item-marker-indicator {
