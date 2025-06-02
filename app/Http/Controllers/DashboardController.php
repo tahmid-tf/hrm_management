@@ -15,25 +15,7 @@ class DashboardController extends Controller
 //   ----------------------------- If user is an admin - Tahmid Ferdous -----------------------------
 
         if (auth()->user()->hasRole('admin')) {
-
-            // -------------------- Attendances  --------------------
-
-            if (Auth::user()->hasRole('employee')) {
-                $attendances = Attendance::with('employee')->where('employee_id', \auth()->id())->get();
-            } else {
-                $attendances = Attendance::with('employee')->get();
-            }
-
-            // -------------------- Announcements  --------------------
-
-            $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
-
-            $notices = Notice::where('status', 'published')
-                ->whereJsonContains('visible_to_roles', $userRole)
-                ->latest()
-                ->get();
-
-            return view('panel.admin.dashboard', compact('attendances','notices'));
+            return $this->admin_functions();
         }
 
 //   ----------------------------- If user is a hr - Tahmid Ferdous -----------------------------
@@ -55,6 +37,25 @@ class DashboardController extends Controller
         }
 
         abort(403);
+    }
+
+    public function admin_functions()
+    {
+        // -------------------- Attendances  --------------------
+
+        $attendances = Attendance::with('employee')->get();
+
+        // -------------------- Announcements  --------------------
+
+        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+
+        $notices = Notice::where('status', 'published')
+            ->whereJsonContains('visible_to_roles', $userRole)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('panel.admin.dashboard', compact('attendances', 'notices'));
     }
 
     public function logout()

@@ -20,21 +20,21 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-xl-auto mt-4">
-                            <div
-                                class="input-group input-group-joined border-0"
-                                style="width: 16.5rem"
-                            >
-                      <span class="input-group-text"
-                      ><i class="text-primary" data-feather="calendar"></i
-                          ></span>
-                                <input
-                                    class="form-control ps-0 pointer"
-                                    id="litepickerRangePlugin"
-                                    placeholder="Select date range..."
-                                />
-                            </div>
-                        </div>
+{{--                        <div class="col-12 col-xl-auto mt-4">--}}
+{{--                            <div--}}
+{{--                                class="input-group input-group-joined border-0"--}}
+{{--                                style="width: 16.5rem"--}}
+{{--                            >--}}
+{{--                      <span class="input-group-text"--}}
+{{--                      ><i class="text-primary" data-feather="calendar"></i--}}
+{{--                          ></span>--}}
+{{--                                <input--}}
+{{--                                    class="form-control ps-0 pointer"--}}
+{{--                                    id="litepickerRangePlugin"--}}
+{{--                                    placeholder="Select date range..."--}}
+{{--                                />--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -58,13 +58,13 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-xxl-12 text-center">
-                                    <img
-                                        class="img-fluid"
-                                        src="{{ asset('assets/img/illustrations/at-work.svg') }}"
-                                        style="max-width: 26rem"
-                                    />
-                                </div>
+{{--                                <div class="col-xl-4 col-xxl-12 text-center">--}}
+{{--                                    <img--}}
+{{--                                        class="img-fluid"--}}
+{{--                                        src="{{ asset('assets/img/illustrations/at-work.svg') }}"--}}
+{{--                                        style="max-width: 26rem"--}}
+{{--                                    />--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -77,49 +77,6 @@
                     <div class="card card-header-actions h-100">
                         <div class="card-header">
                             Announcements
-                            <div class="dropdown no-caret">
-
-                                {{--                                <button--}}
-                                {{--                                    class="btn btn-transparent-dark btn-icon dropdown-toggle"--}}
-                                {{--                                    id="dropdownMenuButton"--}}
-                                {{--                                    type="button"--}}
-                                {{--                                    data-bs-toggle="dropdown"--}}
-                                {{--                                    aria-haspopup="true"--}}
-                                {{--                                    aria-expanded="false"--}}
-                                {{--                                >--}}
-                                {{--                                    <i--}}
-                                {{--                                        class="text-gray-500"--}}
-                                {{--                                        data-feather="more-vertical"--}}
-                                {{--                                    ></i>--}}
-                                {{--                                </button>--}}
-
-                                {{--                                <div--}}
-                                {{--                                    class="dropdown-menu dropdown-menu-end animated--fade-in-up"--}}
-                                {{--                                    aria-labelledby="dropdownMenuButton"--}}
-                                {{--                                >--}}
-                                {{--                                    <h6 class="dropdown-header">Filter Activity:</h6>--}}
-                                {{--                                    <a class="dropdown-item" href="#!"--}}
-                                {{--                                    ><span class="badge bg-green-soft text-green my-1"--}}
-                                {{--                                        >Commerce</span--}}
-                                {{--                                        ></a--}}
-                                {{--                                    >--}}
-                                {{--                                    <a class="dropdown-item" href="#!"--}}
-                                {{--                                    ><span class="badge bg-blue-soft text-blue my-1"--}}
-                                {{--                                        >Reporting</span--}}
-                                {{--                                        ></a--}}
-                                {{--                                    >--}}
-                                {{--                                    <a class="dropdown-item" href="#!"--}}
-                                {{--                                    ><span class="badge bg-yellow-soft text-yellow my-1"--}}
-                                {{--                                        >Server</span--}}
-                                {{--                                        ></a--}}
-                                {{--                                    >--}}
-                                {{--                                    <a class="dropdown-item" href="#!"--}}
-                                {{--                                    ><span class="badge bg-purple-soft text-purple my-1"--}}
-                                {{--                                        >Users</span--}}
-                                {{--                                        ></a--}}
-                                {{--                                    >--}}
-                                {{--                                </div>--}}
-                            </div>
                         </div>
 
                         <div class="card-body">
@@ -152,6 +109,10 @@
             </div>
             <!-- Example Colored Cards for Dashboard Demo-->
             <div class="row">
+
+
+                {{-- ----------------------------- Employees ----------------------------- --}}
+
                 <div class="col-lg-6 col-xl-3 mb-4">
                     <div class="card bg-primary text-white h-100">
                         <div class="card-body">
@@ -159,22 +120,22 @@
                                 class="d-flex justify-content-between align-items-center"
                             >
                                 <div class="me-3">
-                                    <div class="text-white-75 small">
-                                        Earnings (Monthly)
+                                    <div class="text-lg small">
+                                        Employees
                                     </div>
-                                    <div class="text-lg fw-bold">$40,000</div>
+                                    <div class="text-lg fw-bold"></div>
                                 </div>
-                                <i
-                                    class="feather-xl text-white-50"
-                                    data-feather="calendar"
-                                ></i>
+{{--                                <i--}}
+{{--                                    class="feather-xl text-white-50"--}}
+{{--                                    data-feather="calendar"--}}
+{{--                                ></i>--}}
                             </div>
                         </div>
                         <div
                             class="card-footer d-flex align-items-center justify-content-between small"
                         >
-                            <a class="text-white stretched-link" href="#!"
-                            >View Report</a
+                            <a class="text-white stretched-link" href="{{ route('employee.index') }}"
+                            >View Employees</a
                             >
                             <div class="text-white">
                                 <i class="fas fa-angle-right"></i>
@@ -182,27 +143,28 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- ----------------------------- Payrolls ----------------------------- --}}
+
                 <div class="col-lg-6 col-xl-3 mb-4">
-                    <div class="card bg-warning text-white h-100">
+                    <div class="card bg-indigo text-white h-100">
                         <div class="card-body">
                             <div
                                 class="d-flex justify-content-between align-items-center"
                             >
                                 <div class="me-3">
-                                    <div class="text-white-75 small">Earnings (Annual)</div>
-                                    <div class="text-lg fw-bold">$215,000</div>
+                                    <div class="text-lg small">
+                                        Payrolls
+                                    </div>
+                                    <div class="text-lg fw-bold"></div>
                                 </div>
-                                <i
-                                    class="feather-xl text-white-50"
-                                    data-feather="dollar-sign"
-                                ></i>
                             </div>
                         </div>
                         <div
                             class="card-footer d-flex align-items-center justify-content-between small"
                         >
-                            <a class="text-white stretched-link" href="#!"
-                            >View Report</a
+                            <a class="text-white stretched-link" href="{{ route('payrolls.index') }}"
+                            >View Payrolls</a
                             >
                             <div class="text-white">
                                 <i class="fas fa-angle-right"></i>
@@ -210,6 +172,9 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- ----------------------------- Salary Structures ----------------------------- --}}
+
                 <div class="col-lg-6 col-xl-3 mb-4">
                     <div class="card bg-success text-white h-100">
                         <div class="card-body">
@@ -217,20 +182,18 @@
                                 class="d-flex justify-content-between align-items-center"
                             >
                                 <div class="me-3">
-                                    <div class="text-white-75 small">Task Completion</div>
-                                    <div class="text-lg fw-bold">24</div>
+                                    <div class="text-lg small">
+                                        Salary Structures
+                                    </div>
+                                    <div class="text-lg fw-bold"></div>
                                 </div>
-                                <i
-                                    class="feather-xl text-white-50"
-                                    data-feather="check-square"
-                                ></i>
                             </div>
                         </div>
                         <div
                             class="card-footer d-flex align-items-center justify-content-between small"
                         >
-                            <a class="text-white stretched-link" href="#!"
-                            >View Tasks</a
+                            <a class="text-white stretched-link" href="{{ route('salary-structure.index') }}"
+                            >View Salary Structures</a
                             >
                             <div class="text-white">
                                 <i class="fas fa-angle-right"></i>
@@ -238,27 +201,28 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- ----------------------------- Expenses ----------------------------- --}}
+
                 <div class="col-lg-6 col-xl-3 mb-4">
-                    <div class="card bg-danger text-white h-100">
+                    <div class="card bg-dark text-white h-100">
                         <div class="card-body">
                             <div
                                 class="d-flex justify-content-between align-items-center"
                             >
                                 <div class="me-3">
-                                    <div class="text-white-75 small">Pending Requests</div>
-                                    <div class="text-lg fw-bold">17</div>
+                                    <div class="text-lg small">
+                                        Expenses
+                                    </div>
+                                    <div class="text-lg fw-bold"></div>
                                 </div>
-                                <i
-                                    class="feather-xl text-white-50"
-                                    data-feather="message-circle"
-                                ></i>
                             </div>
                         </div>
                         <div
                             class="card-footer d-flex align-items-center justify-content-between small"
                         >
-                            <a class="text-white stretched-link" href="#!"
-                            >View Requests</a
+                            <a class="text-white stretched-link" href="{{ route('expenses.index') }}"
+                            >View Expenses</a
                             >
                             <div class="text-white">
                                 <i class="fas fa-angle-right"></i>
@@ -266,6 +230,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
             <!-- Example Charts for Dashboard Demo-->
             <div class="row">
@@ -276,7 +242,7 @@
                 <div class="col-xl-6 mb-4">
                     <div class="card card-header-actions h-100">
                         <div class="card-header">
-                            Salary Breakdown
+                            Payrolls Breakdown
                             <div class="dropdown no-caret">
                             </div>
                         </div>
