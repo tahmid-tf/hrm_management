@@ -268,10 +268,11 @@
 {{--  ------------------------------------------- Expense Management -------------------------------------------  --}}
 
 
-<div class="sidenav-menu-heading">Expense Management</div>
 
 
 @if(auth()->user()->hasRole('admin'))
+    <div class="sidenav-menu-heading">Expense Categories</div>
+
     @php
         $isExpenseCatActive = request()->routeIs('expense-categories.create') || request()->routeIs('expense-categories.index');
     @endphp
@@ -312,6 +313,10 @@
 
 
 {{-- ------------------- expense management ------------------- --}}
+
+
+<div class="sidenav-menu-heading">Expense Management</div>
+
 
 @php
     $isExpenseActive = request()->routeIs('expenses.create') || request()->routeIs('expenses.index');

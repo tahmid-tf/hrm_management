@@ -53,6 +53,50 @@
 
     {{--  ------------------------------------------- payrolls -------------------------------------------  --}}
 
+
+    {{--  ------------------------------------------- expenses -------------------------------------------  --}}
+
+
+    @php
+        $isExpenseActive = request()->routeIs('expenses.create') || request()->routeIs('expenses.index');
+    @endphp
+
+    <a
+        class="nav-link {{ $isExpenseActive ? '' : 'collapsed' }}"
+        href="javascript:void(0);"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExpenseManagement"
+        aria-expanded="{{ $isExpenseActive ? 'true' : 'false' }}"
+        aria-controls="collapseExpenseManagement"
+    >
+        <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+        Expense
+        <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </a>
+
+    <div
+        class="collapse {{ $isExpenseActive ? 'show' : '' }}"
+        id="collapseExpenseManagement"
+        data-bs-parent="#accordionSidenav"
+    >
+        <nav class="sidenav-menu-nested nav">
+            <a class="nav-link {{ request()->routeIs('expenses.create') ? 'active' : '' }}"
+               href="{{ route('expenses.create') }}">
+                Add Expenses
+            </a>
+            <a class="nav-link {{ request()->routeIs('expenses.index') ? 'active' : '' }}"
+               href="{{ route('expenses.index') }}">
+                View All
+            </a>
+        </nav>
+    </div>
+
+
+    {{--  ------------------------------------------- expenses -------------------------------------------  --}}
+
+
     {{--  ------------------------------------------- Leave Notices -------------------------------------------  --}}
 
     @php
