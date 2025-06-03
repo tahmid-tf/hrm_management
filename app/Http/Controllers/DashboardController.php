@@ -21,7 +21,7 @@ class DashboardController extends Controller
 //   ----------------------------- If user is a hr - Tahmid Ferdous -----------------------------
 
         if (auth()->user()->hasRole('hr')) {
-            return view('panel.hr.dashboard');
+            return $this->hr_functions();
         }
 
 //   ----------------------------- If user is a manager - Tahmid Ferdous -----------------------------
@@ -56,6 +56,24 @@ class DashboardController extends Controller
             ->get();
 
         return view('panel.admin.dashboard', compact('attendances', 'notices'));
+    }
+
+    public function hr_functions(){
+        // -------------------- Attendances  --------------------
+
+        $attendances = Attendance::with('employee')->get();
+
+        // -------------------- Announcements  --------------------
+
+        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+
+        $notices = Notice::where('status', 'published')
+            ->whereJsonContains('visible_to_roles', $userRole)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('panel.hr.dashboard', compact('attendances', 'notices'));
     }
 
     public function logout()
