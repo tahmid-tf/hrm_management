@@ -27,6 +27,7 @@ Employee roles. The system helps organizations manage employees, attendance, pay
 - Employee documents (ID, contracts, certificates)
 - Job positions, departments, and designations
 - Employment status (active, resigned, terminated, etc.)
+- Employee account freeze if needed
 
 ### ⏱️ 2. Attendance & Leave Management
 
@@ -46,6 +47,7 @@ Employee roles. The system helps organizations manage employees, attendance, pay
 
 - Job posting and applicant tracking
 - Resume upload
+- Job postings, individual jobs showing and resume uploading API
 
 ### 💼 5. Expense & Reimbursement Management
 

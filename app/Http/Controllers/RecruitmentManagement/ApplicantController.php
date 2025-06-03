@@ -127,6 +127,17 @@ class ApplicantController extends Controller
             ], 422);
         }
 
+        // ------------------ viewing if its active or not
+
+        $job_postings = JobPosting::find($validated['job_posting_id']);
+
+        if ($job_postings->status == 'closed') {
+             return response()->json([
+                 'success' => false,
+                 'message' => 'Current job posting is closed.',
+             ]);
+        }
+
         Applicant::create([
             'job_posting_id' => $validated['job_posting_id'],
             'name' => $validated['name'],

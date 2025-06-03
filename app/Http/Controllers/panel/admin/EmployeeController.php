@@ -236,4 +236,36 @@ class EmployeeController extends Controller
 
         return back()->with('success', 'Employee deleted successfully');
     }
+
+    // -------------------------------------------------- hold account functionalities --------------------------------------------------
+
+    public function hold_account_index()
+    {
+        $employees = Employee::orderBy('id', 'desc')->get();
+
+        return view('panel.admin.employee.hold_account', compact('employees'));
+    }
+
+    public function hold_account_store($id)
+    {
+        // admin cannot remove himself/herself from the system.
+        if (auth()->id() == $id) {
+            return back()->with('error', 'Admin cannot hold himself/herself from the system.');
+        }
+
+        // only admin can delete employees.
+        if (!auth()->user()->hasRole('admin')) {
+            return back()->with('error', 'Only admin can delete employees.');
+        }
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return back()->with('error', 'User not found');
+        }
+
+        // Sync role
+        $user->syncRoles("hold");
+        return back()->with('success', `${$user->name}'s account on hold successfully`);
+    }
 }

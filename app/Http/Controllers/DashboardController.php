@@ -36,6 +36,12 @@ class DashboardController extends Controller
             return $this->employee_functions();
         }
 
+//   ----------------------------- If user is on hold - Tahmid Ferdous -----------------------------
+
+        if (auth()->user()->hasRole('hold')) {
+            abort(403);
+        }
+
         abort(403);
     }
 

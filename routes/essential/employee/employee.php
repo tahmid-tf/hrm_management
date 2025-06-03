@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::resource('employee', EmployeeController::class);
+
+    Route::get('employee_hold_account', [EmployeeController::class, 'hold_account_index'])->name('employee_hold_account_index');
+    Route::delete('employee_hold_account/{id}', [EmployeeController::class, 'hold_account_store'])->name('employee_hold_account_store');
 });
 
 // ----------------------------------------- HR Routes - Employee Management -----------------------------------------
