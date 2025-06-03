@@ -14,9 +14,26 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExpenseController extends Controller
 {
+
+    public function unauthorized_operation()
+    {
+        $user = auth()->user();
+
+        if ($user->hasRole('manager') || $user->hasRole('employee')) {
+            abort(403, 'Unauthorized operation');
+        }
+
+        return true;
+    }
+
     public function index()
     {
         $expenses = Expense::with(['employee', 'category'])->latest()->get();
+
+        if (auth()->user()->hasRole('manager') || auth()->user()->hasRole('employee')) {
+            $expenses = Expense::where('employee_id', \auth()->id())->latest()->get();
+        }
+
         return view('panel.essential.expense_management.expenses.index', compact('expenses'));
     }
 
@@ -59,13 +76,19 @@ class ExpenseController extends Controller
 
     public function edit(Expense $expense)
     {
+
+        $this->unauthorized_operation();
+
 //        $this->authorize('update', $expense); // optional policy
+
         $categories = ExpenseCategory::all();
         return view('panel.essential.expense_management.expenses.edit', compact('expense', 'categories'));
     }
 
     public function update(Request $request, Expense $expense)
     {
+        $this->unauthorized_operation();
+
         $request->validate([
             'category_id' => 'required|exists:expense_categories,id',
             'amount' => 'required|numeric|min:0',
@@ -86,6 +109,8 @@ class ExpenseController extends Controller
 
     public function destroy(Expense $expense)
     {
+        $this->unauthorized_operation();
+
         $expense->delete();
         return redirect()->route('expenses.index')->with('success', 'Expense deleted.');
     }
@@ -93,6 +118,8 @@ class ExpenseController extends Controller
     // --------------------------- Bulk accept expense ---------------------------
     public function bulkAccept(Request $request)
     {
+        $this->unauthorized_operation();
+
         $ids = $request->input('selected_expenses');
 
         // Guard clause for empty selection
@@ -128,6 +155,8 @@ class ExpenseController extends Controller
 
     public function bulkReject(Request $request)
     {
+        $this->unauthorized_operation();
+
         $ids = $request->input('selected_expenses');
 
         if (empty($ids) || !is_array($ids)) {
@@ -170,6 +199,7 @@ class ExpenseController extends Controller
     public function expense_structure_api()
     {
         $expenses = Expense::selectRaw('DATE_FORMAT(expense_date, "%Y-%m") as month, SUM(amount) as total_expense')
+            ->where('status', 'approved')
             ->groupBy('month')
             ->orderBy('month')
             ->get();

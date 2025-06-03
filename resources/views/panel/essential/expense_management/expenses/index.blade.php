@@ -34,13 +34,23 @@
                             <form id="bulk-action-form" method="POST">
                                 @csrf
 
-                                <a href="{{ route('expenses.create') }}" class="btn btn-primary mb-3">Add New
-                                    Expense</a>
-                                <a href="#" onclick="submitForm('accept')" class="btn btn-success mb-3">Accept Selected
-                                    Expenses</a>
-                                <a href="#" onclick="submitForm('reject')" class="btn btn-danger mb-3">Reject Selected
-                                    Expenses</a>
+
+                                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+
+                                    <a href="{{ route('expenses.create') }}" class="btn btn-primary mb-3">Add New
+                                        Expense</a>
+                                    <a href="#" onclick="submitForm('accept')" class="btn btn-success mb-3">Accept
+                                        Selected
+                                        Expenses</a>
+                                    <a href="#" onclick="submitForm('reject')" class="btn btn-danger mb-3">Reject
+                                        Selected
+                                        Expenses</a>
+
+                                @endif
+
+
                             </form>
+
                             <!-- Bulk Action Form Ends -->
 
                             @if(session('success'))
@@ -54,48 +64,58 @@
                             <table id="datatablesSimple">
                                 <thead>
                                 <tr>
-                                    <th>Select</th>
+                                    @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+                                        <th>Select</th>
+                                    @endif
                                     <th>Token</th>
                                     <th>Employee</th>
                                     <th>Category</th>
                                     <th>Amount</th>
                                     <th>Date</th>
                                     <th>Status</th>
-{{--                                    <th>Admin Comment</th>--}}
+                                    {{--                                    <th>Admin Comment</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($expenses as $expense)
                                     <tr>
-                                        <!-- This checkbox is now OUTSIDE the form, so we will use JS to move selected values into the form before submitting -->
 
-                                        @if($expense->status == 'pending')
+                                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+                                            @if($expense->status == 'pending')
 
-                                            <td><input type="checkbox" value="{{ $expense->id }}"
-                                                       class="expense-checkbox">
-                                        @else
-                                            <td>-</td>
+                                                <td><input type="checkbox" value="{{ $expense->id }}"
+                                                           class="expense-checkbox">
+                                            @else
+                                                <td>-</td>
+                                            @endif
                                         @endif
+
                                         <td>#{{ $expense->id }}</td>
                                         <td>{{ $expense->employee->name }}</td>
                                         <td>{{ $expense->category->name }}</td>
                                         <td>{{ number_format($expense->amount, 2) }}</td>
                                         <td>{{ $expense->expense_date }}</td>
                                         <td>{{ ucfirst($expense->status) }}</td>
-{{--                                        <td>{{ $expense->admin_comment ?? '-' }}</td>--}}
+                                        {{--                                        <td>{{ $expense->admin_comment ?? '-' }}</td>--}}
                                         <td>
                                             <a href="{{ route('expenses.show', $expense) }}"
                                                class="btn btn-sm btn-info">View</a>
-                                            <a href="{{ route('expenses.edit', $expense) }}"
-                                               class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="{{ route('expenses.destroy', $expense) }}" method="POST"
-                                                  style="display:inline;">
-                                                @csrf @method('DELETE')
-                                                <button class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Are you sure?')">Delete
-                                                </button>
-                                            </form>
+
+                                            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('hr'))
+
+                                                <a href="{{ route('expenses.edit', $expense) }}"
+                                                   class="btn btn-sm btn-warning">Edit</a>
+                                                <form action="{{ route('expenses.destroy', $expense) }}" method="POST"
+                                                      style="display:inline;">
+                                                    @csrf @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Are you sure?')">Delete
+                                                    </button>
+
+                                                    @endif
+
+                                                </form>
                                         </td>
                                     </tr>
                                 @endforeach

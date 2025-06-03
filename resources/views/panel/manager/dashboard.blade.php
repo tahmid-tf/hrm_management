@@ -172,7 +172,7 @@
                     </div>
                 </div>
 
-                {{-- ----------------------------- Leave Notices ----------------------------- --}}
+                {{-- ----------------------------- Expenses ----------------------------- --}}
 
                 <div class="col-lg-6 col-xl-3 mb-4">
                     <div class="card bg-success text-white h-100">
@@ -182,7 +182,7 @@
                             >
                                 <div class="me-3">
                                     <div class="text-lg small">
-                                        Leave Notices
+                                        Expenses
                                     </div>
                                     <div class="text-lg fw-bold"></div>
                                 </div>
@@ -191,8 +191,8 @@
                         <div
                             class="card-footer d-flex align-items-center justify-content-between small"
                         >
-                            <a class="text-white stretched-link" href="{{ route('leave_notices.index') }}"
-                            >View Leave Notices</a
+                            <a class="text-white stretched-link" href="{{ route('expenses.index') }}"
+                            >View Expenses</a
                             >
                             <div class="text-white">
                                 <i class="fas fa-angle-right"></i>
