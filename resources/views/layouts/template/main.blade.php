@@ -144,7 +144,7 @@
 
 
                 @foreach(\App\Models\Notice::latest()->take(10)->get() as $notice)
-                    <a class="dropdown-item dropdown-notifications-item" href="{{ route('notices.show', $notice) }}">
+                    <a class="dropdown-item dropdown-notifications-item" href="{{ route('public_notice_data') }}">
                         <div class="dropdown-notifications-item-icon bg-primary">
                             <i data-feather="bell"></i>
                         </div>
@@ -160,7 +160,7 @@
                 @endforeach
 
 
-                <a class="dropdown-item dropdown-notifications-footer" href="{{ route('notices.index') }}">View All Alerts</a>
+                <a class="dropdown-item dropdown-notifications-footer" href="{{ route('public_notice_data') }}">View All Alerts</a>
             </div>
         </li>
 
