@@ -126,7 +126,28 @@
                                     cursor: pointer;
                                     color: #dc3545;
                                 }
+
+                                /* ----------- Responsive Styling ----------- */
+
+                                @media (max-width: 992px) {
+                                    .board {
+                                        flex-direction: column;
+                                        align-items: center;
+                                    }
+
+                                    ul.kanban-column {
+                                        width: 90%;
+                                        max-width: 500px;
+                                    }
+                                }
+
+                                @media (min-width: 993px) and (max-width: 1200px) {
+                                    ul.kanban-column {
+                                        width: 250px;
+                                    }
+                                }
                             </style>
+
 
                             <div class="board">
                                 @php
@@ -188,38 +209,54 @@
             {{-- ------------------------------------ Task Management Settings ------------------------------------ --}}
 
 
+            <style>
+                /* Scoped styles for Task Management Settings */
+                .task-management-settings .task-settings-actions {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+
+                .task-management-settings .task-settings-actions form {
+                    flex: 1 1 auto;
+                    min-width: 220px;
+                }
+
+                .task-management-settings .task-settings-actions button {
+                    width: 100%;
+                }
+            </style>
+
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-4">
                         <div class="card-header">Task Management Settings</div>
                         <div class="card-body">
 
-                            {{-- ---- restore all trashed tasks ---- --}}
+                            <div class="card-body task-management-settings">
+                                <div class="task-settings-actions">
+                                    {{-- ---- restore all trashed tasks ---- --}}
+                                    <form action="{{ route('restore-all-trashed-tasks') }}" method="POST"
+                                          onsubmit="return confirm('Are you sure to restore all trashed tasks?');">
+                                        @csrf
+                                        <button class="btn btn-indigo">Restore all trashed tasks</button>
+                                    </form>
 
-                            <form action="{{ route('restore-all-trashed-tasks') }}" method="POST"
-                                  class="d-inline"
-                                  onsubmit="return confirm('Are you sure to restore all trashed tasks?');">
-                                @csrf
-                                <button class="btn btn-indigo">Restore all trashed tasks</button>
-                            </form>
+                                    {{-- ---- clear all trashed tasks ---- --}}
+                                    <form action="{{ route('clear-all-trashed-tasks') }}" method="POST"
+                                          onsubmit="return confirm('Are you sure to remove all trashed tasks?');">
+                                        @csrf
+                                        <button class="btn btn-primary">Clear all trashed tasks</button>
+                                    </form>
 
-                            {{-- ---- clear all trashed tasks ---- --}}
-
-                            <form action="{{ route('clear-all-trashed-tasks') }}" method="POST"
-                                  class="d-inline"
-                                  onsubmit="return confirm('Are you sure to remove all trashed tasks?');">
-                                @csrf
-                                <button class="btn btn-primary">Clear all trashed tasks</button>
-                            </form>
-
-                            {{-- ---- clear all tasks ---- --}}
-
-                            <form action="{{ route('clear-all-tasks') }}" method="POST"
-                                  class="d-inline"
-                                  onsubmit="return confirm('Are you sure to remove all tasks?');">
-                                @csrf
-                                <button class="btn btn-danger">Clear all tasks</button>
-                            </form>
+                                    {{-- ---- clear all tasks ---- --}}
+                                    <form action="{{ route('clear-all-tasks') }}" method="POST"
+                                          onsubmit="return confirm('Are you sure to remove all tasks?');">
+                                        @csrf
+                                        <button class="btn btn-danger">Clear all tasks</button>
+                                    </form>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
