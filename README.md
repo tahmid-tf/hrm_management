@@ -3,6 +3,8 @@
 A complete Human Resource Management (HRM) system built with **Laravel 11**, designed for Admin, HR, Manager, and
 Employee roles. The system helps organizations manage employees, attendance, payroll, recruitment, and more.
 
+<img src="/public/hrm_scr.png" alt="Laravel HRM Screenshot">
+
 ---
 
 ## 🔐 Login Credentials (Demo)

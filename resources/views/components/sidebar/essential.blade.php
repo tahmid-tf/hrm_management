@@ -397,8 +397,6 @@
 
 {{--  ------------------------- Notices for all -------------------------  --}}
 
-<div class="sidenav-menu-heading">Announcements</div>
-
 @php
     $isAnnouncementActive = request()->routeIs('public_notice_data');
 @endphp

@@ -31,7 +31,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // Area Chart Example
 
 // --------------------------------------------- Payroll Breakdown ---------------------------------------------
-fetch("/salary_structure_api")
+
+
+fetch(salaryStructureUrl)
     .then(response => response.json())
     .then(result => {
         const monthlyData = Array(12).fill(0);

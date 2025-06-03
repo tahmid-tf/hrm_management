@@ -164,7 +164,7 @@ class EmployeeController extends Controller
             'address' => 'nullable|string|max:1000',
             'status' => 'required|in:active,inactive',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'role' => 'required|in:admin,hr,manager,employee',
+            'role' => 'required|in:admin,hr,manager,employee,hold',
         ]);
 
 

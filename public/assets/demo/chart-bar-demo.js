@@ -31,7 +31,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // ----------------------------------- Expense Breakdown -----------------------------------
 
-fetch("/expense_structure_api")
+fetch(expenseStructureApiUrl)
     .then(response => response.json())
     .then(result => {
         const monthlyData = Array(12).fill(0);

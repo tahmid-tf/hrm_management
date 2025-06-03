@@ -23,6 +23,6 @@ Route::middleware(['auth', 'admin_hr'])->prefix('expense')->group(function () {
 // -------------------------------------------- Payroll data for employees --------------------------------------------
 
 Route::middleware(['auth', 'admin_hr_manager'])->group(function () {
-    Route::get('/expense_structure_api', [ExpenseController::class, 'expense_structure_api']);
+    Route::get('/expense_structure_api', [ExpenseController::class, 'expense_structure_api'])->name('expense_structure_api');
 });
 

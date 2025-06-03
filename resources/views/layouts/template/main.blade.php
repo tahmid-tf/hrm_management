@@ -11,6 +11,8 @@
     <meta name="author" content=""/>
     <title>Dashboard</title>
 
+{{--    @routes--}}
+{{--    <script type="module" src="/resources/js/app.js"></script>--}}
 
     {{--   ------------------------------------------- datatable css ------------------------------------------- --}}
 
@@ -311,12 +313,12 @@
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                {{--                <a class="dropdown-item" href="#!">--}}
-                {{--                    <div class="dropdown-item-icon">--}}
-                {{--                        <i data-feather="settings"></i>--}}
-                {{--                    </div>--}}
-                {{--                    Account--}}
-                {{--                </a>--}}
+                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                    <div class="dropdown-item-icon">
+                        <i data-feather="settings"></i>
+                    </div>
+                    Profile
+                </a>
                 <a class="dropdown-item" href="{{ route('logout_') }}">
                     <div class="dropdown-item-icon">
                         <i data-feather="log-out"></i>
@@ -407,7 +409,7 @@
             <div class="container-xl px-4">
                 <div class="row">
                     <div class="col-md-6 small">
-                        Copyright &copy; Your Website 2021
+                        Copyright &copy; Tahmid Ferdous {{ date('Y') }}
                     </div>
                     <div class="col-md-6 text-md-end small">
                         <a href="#!">Privacy Policy</a>
@@ -428,6 +430,12 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
     crossorigin="anonymous"
 ></script>
+
+<script>
+    const salaryStructureUrl = "{{ route('salary_structure_api') }}";
+    const expenseStructureApiUrl = "{{ route('expense_structure_api') }}";
+</script>
+
 <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('assets/demo/chart-bar-demo.js') }}"></script>
 

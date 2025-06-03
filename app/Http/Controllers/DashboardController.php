@@ -52,7 +52,7 @@ class DashboardController extends Controller
         $notices = Notice::where('status', 'published')
             ->whereJsonContains('visible_to_roles', $userRole)
             ->latest()
-            ->take(5)
+            ->take(4)
             ->get();
 
         return view('panel.admin.dashboard', compact('attendances', 'notices'));
