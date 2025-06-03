@@ -27,7 +27,7 @@ class DashboardController extends Controller
 //   ----------------------------- If user is a manager - Tahmid Ferdous -----------------------------
 
         if (auth()->user()->hasRole('manager')) {
-            return view('panel.manager.dashboard');
+            return $this->manager_functions();
         }
 
 //   ----------------------------- If user is employee - Tahmid Ferdous -----------------------------
@@ -75,6 +75,26 @@ class DashboardController extends Controller
 
         return view('panel.hr.dashboard', compact('attendances', 'notices'));
     }
+
+
+    public function manager_functions(){
+        // -------------------- Attendances  --------------------
+
+        $attendances = Attendance::with('employee')->get();
+
+        // -------------------- Announcements  --------------------
+
+        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+
+        $notices = Notice::where('status', 'published')
+            ->whereJsonContains('visible_to_roles', $userRole)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('panel.manager.dashboard', compact('attendances', 'notices'));
+    }
+
 
     public function logout()
     {
