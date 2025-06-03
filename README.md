@@ -61,23 +61,19 @@ Employee roles. The system helps organizations manage employees, attendance, pay
 - Attendance reports
 - Payroll reports
 - Leave summary reports
-- Employee performance analytics
-
-### ⚙️ 8. System Settings & Configuration
-
-- Company profile and settings
-- Multi-language support (optional)
-- Email and notification settings
+- Payroll breakdown charts
+- Expense breakdown charts
 
 ---
 
 ## 🚧 Currently Working On
 
-### 💼 5. Expense & Reimbursement Management
+### 📈 7. Reports & Analytics
 
-- Employee expense submissions
-- Managerial approval system
-- Payment processing
+- Attendance reports
+- Payroll reports
+- Payroll breakdown charts
+- Expense breakdown charts
 
 ---
 

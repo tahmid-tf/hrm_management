@@ -16,25 +16,25 @@
                                 Dashboard
                             </h1>
                             <div class="page-header-subtitle">
-                                Example dashboard overview and content summary
+                                A concise summary of key metrics, trends, and essential HR management insights
                             </div>
                         </div>
 
-{{--                        <div class="col-12 col-xl-auto mt-4">--}}
-{{--                            <div--}}
-{{--                                class="input-group input-group-joined border-0"--}}
-{{--                                style="width: 16.5rem"--}}
-{{--                            >--}}
-{{--                      <span class="input-group-text"--}}
-{{--                      ><i class="text-primary" data-feather="calendar"></i--}}
-{{--                          ></span>--}}
-{{--                                <input--}}
-{{--                                    class="form-control ps-0 pointer"--}}
-{{--                                    id="litepickerRangePlugin"--}}
-{{--                                    placeholder="Select date range..."--}}
-{{--                                />--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="col-12 col-xl-auto mt-4">--}}
+                        {{--                            <div--}}
+                        {{--                                class="input-group input-group-joined border-0"--}}
+                        {{--                                style="width: 16.5rem"--}}
+                        {{--                            >--}}
+                        {{--                      <span class="input-group-text"--}}
+                        {{--                      ><i class="text-primary" data-feather="calendar"></i--}}
+                        {{--                          ></span>--}}
+                        {{--                                <input--}}
+                        {{--                                    class="form-control ps-0 pointer"--}}
+                        {{--                                    id="litepickerRangePlugin"--}}
+                        {{--                                    placeholder="Select date range..."--}}
+                        {{--                                />--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -50,21 +50,20 @@
                                     <div
                                         class="text-center text-xl-start text-xxl-center mb-4 mb-xl-0 mb-xxl-4"
                                     >
-                                        <h1 class="text-primary">Welcome to Dashboard!</h1>
+                                        <h1 class="text-primary">Welcome to Your HR Management Dashboard!</h1>
                                         <p class="text-gray-700 mb-0">
-                                            Browse our fully designed UI toolkit! Browse our
-                                            prebuilt app pages, components, and utilites, and be
-                                            sure to look at our full documentation!
+                                            Effortlessly manage employees, streamline workflows, and optimize HR
+                                            operations with our powerful tools and resources.
                                         </p>
                                     </div>
                                 </div>
-{{--                                <div class="col-xl-4 col-xxl-12 text-center">--}}
-{{--                                    <img--}}
-{{--                                        class="img-fluid"--}}
-{{--                                        src="{{ asset('assets/img/illustrations/at-work.svg') }}"--}}
-{{--                                        style="max-width: 26rem"--}}
-{{--                                    />--}}
-{{--                                </div>--}}
+                                {{--                                <div class="col-xl-4 col-xxl-12 text-center">--}}
+                                {{--                                    <img--}}
+                                {{--                                        class="img-fluid"--}}
+                                {{--                                        src="{{ asset('assets/img/illustrations/at-work.svg') }}"--}}
+                                {{--                                        style="max-width: 26rem"--}}
+                                {{--                                    />--}}
+                                {{--                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -125,10 +124,10 @@
                                     </div>
                                     <div class="text-lg fw-bold"></div>
                                 </div>
-{{--                                <i--}}
-{{--                                    class="feather-xl text-white-50"--}}
-{{--                                    data-feather="calendar"--}}
-{{--                                ></i>--}}
+                                {{--                                <i--}}
+                                {{--                                    class="feather-xl text-white-50"--}}
+                                {{--                                    data-feather="calendar"--}}
+                                {{--                                ></i>--}}
                             </div>
                         </div>
                         <div
