@@ -3,7 +3,7 @@
     {{--  ------------------------------------------- Employee Management -------------------------------------------  --}}
 
     @php
-        $isEmployeeActive = request()->routeIs('employee.create') || request()->routeIs('employee.index');
+        $isEmployeeActive = request()->routeIs('employee.create') || request()->routeIs('employee.index') || request()->routeIs('employee_hold_account_index');
     @endphp
 
     <a
@@ -33,6 +33,11 @@
             <a class="nav-link {{ request()->routeIs('employee.index') ? 'active' : '' }}"
                href="{{ route('employee.index') }}">
                 View All Employees
+            </a>
+
+            <a class="nav-link {{ request()->routeIs('employee_hold_account_index') ? 'active' : '' }}"
+               href="{{ route('employee_hold_account_index') }}">
+                Hold Accounts
             </a>
         </nav>
     </div>

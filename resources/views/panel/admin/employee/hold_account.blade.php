@@ -15,7 +15,7 @@
                                 <div class="page-header-icon">
                                     <i data-feather="user"></i>
                                 </div>
-                                Account Settings - View All Employees
+                                Account Settings - Hold Account
                             </h1>
                         </div>
                     </div>
@@ -28,16 +28,16 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Account Settings - View All Employees</div>
+                        <div class="card-header">Account Settings - Hold Account</div>
                         <div class="card-body">
 
                             @if(session('success'))
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
-                                @if(session('error'))
-                                    <div class="alert alert-danger">{{ session('error') }}</div>
-                                @endif
+                            @if(session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
 
                             <table id="datatablesSimple">
                                 <thead>
@@ -49,7 +49,7 @@
                                     <th>Department</th>
                                     <th>Phone</th>
                                     <th>Joining Date</th>
-{{--                                    <th>Salary</th>--}}
+                                    {{--                                    <th>Salary</th>--}}
                                     <th>Status</th>
                                     <th>Role</th>
                                     <th>Actions</th>
@@ -65,7 +65,7 @@
                                         <td>{{ $employee->department }}</td>
                                         <td>{{ $employee->phone }}</td>
                                         <td>{{ \Carbon\Carbon::parse($employee->joining_date)->format('Y-m-d') }}</td>
-{{--                                        <td>{{ number_format($employee->salary, 2) }}/-</td>--}}
+                                        {{--                                        <td>{{ number_format($employee->salary, 2) }}/-</td>--}}
                                         <td>
                                             @if($employee->status == 'active')
                                                 <span class="badge bg-success text-white rounded-pill">Active</span>
@@ -78,34 +78,16 @@
                                         </td>
                                         <td>
 
-                                            <a href="{{ route('employee.show', $employee->id) }}"
-                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2">
-                                                <i data-feather="eye"></i>
-                                            </a>
-
-                                            <a href="{{ route('employee.edit', $employee->id) }}"
-                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2">
-                                                <i data-feather="edit"></i>
-                                            </a>
-
-
-                                            <a href="{{ route('attendance_individual_list_export', $employee->id) }}"
-                                               class="btn btn-datatable btn-icon btn-transparent-dark me-2"
-                                               title="Attendance List Export"
-                                               onclick="return confirm('Confirm to export data?')">
-                                                <i data-feather="download" title="Export Attendance Data"></i>
-                                            </a>
-
 
                                             {{-- -------------------------------- Delete with confirmation -------------------------------- --}}
 
-                                            <form action="{{ route('employee.destroy', $employee->id) }}" method="POST"
+                                            <form action="{{ route('employee_hold_account_store', $employee->id) }}" method="POST"
                                                   class="d-inline"
-                                                  onsubmit="return confirm('Are you sure to delete this employee?');">
+                                                  onsubmit="return confirm('Are you sure to freeze this account?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-datatable btn-icon btn-transparent-dark">
-                                                    <i data-feather="trash-2"></i>
+                                                    <i data-feather="lock"></i>
                                                 </button>
                                             </form>
 
