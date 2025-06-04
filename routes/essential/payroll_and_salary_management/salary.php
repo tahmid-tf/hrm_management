@@ -43,7 +43,7 @@ Route::middleware(['auth', 'employee_manager'])->prefix('salary')->group(functio
 // -------------------------------------------- Payroll data for employees --------------------------------------------
 
 Route::middleware(['auth', 'admin_hr_manager'])->group(function () {
-    Route::get('/salary_structure_api', [SalaryStructureController::class, 'salary_structure_api'])->name('salary_structure_api');
+    Route::get('/payroll_api', [SalaryStructureController::class, 'salary_structure_api'])->name('payroll_api');
 });
 
 
