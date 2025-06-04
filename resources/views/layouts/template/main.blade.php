@@ -432,7 +432,7 @@
 ></script>
 
 <script>
-    const salaryStructureUrl = "{{ route('salary_structure_api') }}";
+    const payrollUrl = "{{ route('payroll_api') }}";
     const expenseStructureApiUrl = "{{ route('expense_structure_api') }}";
 </script>
 

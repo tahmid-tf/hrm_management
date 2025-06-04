@@ -33,7 +33,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // --------------------------------------------- Payroll Breakdown ---------------------------------------------
 
 
-fetch(salaryStructureUrl)
+fetch(payrollUrl)
     .then(response => response.json())
     .then(result => {
         const monthlyData = Array(12).fill(0);
