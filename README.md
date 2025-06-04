@@ -9,6 +9,8 @@ Employee roles. The system helps organizations manage employees, attendance, pay
 
 ## 🔐 Login Credentials (Demo)
 
+Demo URL: http://13.126.82.125/hrm_management/public/
+
 | Role     | Email                | Password  |
 |----------|----------------------|-----------|
 | Admin    | tahmid.tf1@gmail.com | 123456789 |
@@ -88,6 +90,7 @@ Employee roles. The system helps organizations manage employees, attendance, pay
 - **Database**: MySQL
 - **Authentication**: Laravel Breeze
 - **Roles & Permissions**: [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission)
+- **Deployment**: AWS Lightsail
 
 ---
 
