@@ -90,6 +90,7 @@ Demo URL: http://13.126.82.125/hrm_management/public/
 - **Database**: MySQL
 - **Authentication**: Laravel Breeze
 - **Roles & Permissions**: [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission)
+- **Deployment**: AWS Lightsail
 
 ---
 
