@@ -13,6 +13,7 @@
         "laravel/telescope": "^5.8",
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1",
+        "predis/predis": "*",
         "spatie/laravel-permission": "^6.17",
         "tightenco/ziggy": "^2.5"
     },

@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
@@ -47,38 +48,77 @@ class DashboardController extends Controller
 
     public function admin_functions()
     {
-        // -------------------- Attendances  --------------------
 
-        $attendances = Attendance::with('employee')->get();
+//        // -------------------- Attendances  --------------------
+//
+//        $attendances = Attendance::with('employee')->get();
+//
+//        // -------------------- Announcements  --------------------
+//
+//        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+//
+//        $notices = Notice::where('status', 'published')
+//            ->whereJsonContains('visible_to_roles', $userRole)
+//            ->latest()
+//            ->take(4)
+//            ->get();
+//
+//        return view('panel.admin.dashboard', compact('attendances', 'notices'));
 
-        // -------------------- Announcements  --------------------
+        // Cache attendances
+        $attendances = Cache::remember('admin_attendances', 60, function () {
+            return Attendance::with('employee')->get();
+        });
 
-        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+        // Get current user's role
+        $userRole = Auth::user()->getRoleNames()->first();
 
-        $notices = Notice::where('status', 'published')
-            ->whereJsonContains('visible_to_roles', $userRole)
-            ->latest()
-            ->take(4)
-            ->get();
+        // Cache notices per role
+        $notices = Cache::remember("admin_notices_{$userRole}", 60, function () use ($userRole) {
+            return Notice::where('status', 'published')
+                ->whereJsonContains('visible_to_roles', $userRole)
+                ->latest()
+                ->take(4)
+                ->get();
+        });
 
         return view('panel.admin.dashboard', compact('attendances', 'notices'));
     }
 
     public function hr_functions()
     {
-        // -------------------- Attendances  --------------------
+//        // -------------------- Attendances  --------------------
+//
+//        $attendances = Attendance::with('employee')->get();
+//
+//        // -------------------- Announcements  --------------------
+//
+//        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+//
+//        $notices = Notice::where('status', 'published')
+//            ->whereJsonContains('visible_to_roles', $userRole)
+//            ->latest()
+//            ->take(4)
+//            ->get();
+//
+//        return view('panel.hr.dashboard', compact('attendances', 'notices'));
 
-        $attendances = Attendance::with('employee')->get();
+        // Cache attendances for HR
+        $attendances = Cache::remember('hr_attendances', 60, function () {
+            return Attendance::with('employee')->get();
+        });
 
-        // -------------------- Announcements  --------------------
+        // Get user's role
+        $userRole = Auth::user()->getRoleNames()->first();
 
-        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
-
-        $notices = Notice::where('status', 'published')
-            ->whereJsonContains('visible_to_roles', $userRole)
-            ->latest()
-            ->take(4)
-            ->get();
+        // Cache notices specific to HR role
+        $notices = Cache::remember("hr_notices_{$userRole}", 60, function () use ($userRole) {
+            return Notice::where('status', 'published')
+                ->whereJsonContains('visible_to_roles', $userRole)
+                ->latest()
+                ->take(4)
+                ->get();
+        });
 
         return view('panel.hr.dashboard', compact('attendances', 'notices'));
     }
@@ -86,38 +126,78 @@ class DashboardController extends Controller
 
     public function manager_functions()
     {
-        // -------------------- Attendances  --------------------
+//        // -------------------- Attendances  --------------------
+//
+//        $attendances = Attendance::with('employee')->get();
+//
+//        // -------------------- Announcements  --------------------
+//
+//        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+//
+//        $notices = Notice::where('status', 'published')
+//            ->whereJsonContains('visible_to_roles', $userRole)
+//            ->latest()
+//            ->take(4)
+//            ->get();
+//
+//        return view('panel.manager.dashboard', compact('attendances', 'notices'));
 
-        $attendances = Attendance::with('employee')->get();
+        // Cache attendances for manager
+        $attendances = Cache::remember('manager_attendances', 60, function () {
+            return Attendance::with('employee')->get();
+        });
 
-        // -------------------- Announcements  --------------------
+        // Get current user's role
+        $userRole = Auth::user()->getRoleNames()->first();
 
-        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
-
-        $notices = Notice::where('status', 'published')
-            ->whereJsonContains('visible_to_roles', $userRole)
-            ->latest()
-            ->take(4)
-            ->get();
+        // Cache notices based on role
+        $notices = Cache::remember("manager_notices_{$userRole}", 60, function () use ($userRole) {
+            return Notice::where('status', 'published')
+                ->whereJsonContains('visible_to_roles', $userRole)
+                ->latest()
+                ->take(4)
+                ->get();
+        });
 
         return view('panel.manager.dashboard', compact('attendances', 'notices'));
     }
 
     public function employee_functions()
     {
-        // -------------------- Attendances  --------------------
+//        // -------------------- Attendances  --------------------
+//
+//        $attendances = Attendance::where('employee_id', \auth()->id())->get();
+//
+//        // -------------------- Announcements  --------------------
+//
+//        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+//
+//        $notices = Notice::where('status', 'published')
+//            ->whereJsonContains('visible_to_roles', $userRole)
+//            ->latest()
+//            ->take(4)
+//            ->get();
+//
+//        return view('panel.employee.dashboard', compact('attendances', 'notices'));
 
-        $attendances = Attendance::where('employee_id', \auth()->id())->get();
+        $userId = auth()->id();
 
-        // -------------------- Announcements  --------------------
+        // Cache attendances per employee
+        $attendances = Cache::remember("employee_attendances_{$userId}", 60, function () use ($userId) {
+            return Attendance::where('employee_id', $userId)->get();
+        });
 
-        $userRole = Auth::user()->getRoleNames()->first(); // If using Spatie
+        // Get current user's role
+        $userRole = Auth::user()->getRoleNames()->first();
 
-        $notices = Notice::where('status', 'published')
-            ->whereJsonContains('visible_to_roles', $userRole)
-            ->latest()
-            ->take(4)
-            ->get();
+        // Cache notices per role
+        $notices = Cache::remember("employee_notices_{$userRole}", 60, function () use ($userRole) {
+            return Notice::where('status', 'published')
+                ->whereJsonContains('visible_to_roles', $userRole)
+                ->latest()
+                ->take(4)
+                ->get();
+        });
 
         return view('panel.employee.dashboard', compact('attendances', 'notices'));
     }
