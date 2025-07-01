@@ -72,17 +72,6 @@ Demo URL: http://13.126.82.125/hrm_management/public/
 
 ---
 
-## 🚧 Currently Working On
-
-### 📈 7. Reports & Analytics
-
-- Attendance reports
-- Payroll reports
-- Payroll breakdown charts
-- Expense breakdown charts
-
----
-
 ## 🛠️ Tech Stack
 
 - **Framework**: Laravel 11
